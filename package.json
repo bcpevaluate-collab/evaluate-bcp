@@ -1,0 +1,34 @@
+package.json
+
+{
+  "name": "evaluatebcp",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+  "dev": "next dev",
+  "build": "next build",
+  "start": "next start"
+},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bcpevaluate-collab/evaluate-bcp.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bcpevaluate-collab/evaluate-bcp/issues"
+  },
+  "homepage": "https://github.com/bcpevaluate-collab/evaluate-bcp#readme",
+  "description": "",
+  "dependencies": {
+    "next": "^14.2.33",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@types/node": "^24.6.0",
+    "@types/react": "^19.1.16",
+    "typescript": "^5.9.2"
+  }
+}
