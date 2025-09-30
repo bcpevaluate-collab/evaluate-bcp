@@ -1,3 +1,23 @@
+/* === Flexo (BCP) === */
+@font-face {
+  font-family: "Flexo";
+  src: url("/fonts/Flexo-Regular.woff2") format("woff2");
+  font-weight: 400; /* Regular */
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Flexo";
+  src: url("/fonts/Flexo-Demi.woff2") format("woff2");
+  font-weight: 600; /* Demi */
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Familia por defecto del sitio (opcional pero recomendado) */
+:root { --bcp-font: "Flexo", Helvetica, Arial, sans-serif; }
+html, body { font-family: var(--bcp-font); }
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

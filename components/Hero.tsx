@@ -6,13 +6,18 @@ export default function Hero() {
       className="relative overflow-hidden text-white pb-36"
       style={{ background: "linear-gradient(180deg,#0B3A8C 0%,#1746A2 100%)" }}
     >
-      <div className="container-max relative z-10 py-10 md:py-16">
-        <p className="text-sm">Solicita tu</p>
-        <h1 className="text-3xl md:text-5xl font-bold leading-tight">
-          Préstamo 100% online
-        </h1>
-        <p className="mt-2 text-lg md:text-xl">y recíbelo al instante</p>
-      </div>
+      <div className="text-white font-bcp max-w-[22rem] md:max-w-none">
+  <p className="text-[14px] md:text-[16px] font-[400] mb-1">Solicita tu</p>
+
+  <h1 className="text-[32px] md:text-[40px] font-[600] leading-[1.25] mb-2">
+    <span>Préstamo</span>
+    <br className="block" />
+    <span>100% online</span>
+  </h1>
+
+  <p className="text-[16px] md:text-[18px] font-[400] mt-1">y recíbelo al instante</p>
+</div>
+
 
       
 <Image
