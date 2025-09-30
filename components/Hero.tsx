@@ -14,30 +14,30 @@ export default function Hero() {
         <p className="mt-2 text-lg md:text-xl">y recíbelo al instante</p>
       </div>
 
-      {/* Imagen alineada derecha y centrada */}
-      <Image
-        src="/hero-illustration.svg" // tu imagen
-        alt="Préstamo online"
-        width={180}
-        height={180}
-        priority
-        className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 md:right-10"
-      />
+      // Imagen: súbela por encima de la curva y céntrala a la derecha
+<Image
+  src="/hero-illustration.svg"
+  alt="Préstamo online"
+  width={150}              // si queda grande, prueba 140
+  height={150}
+  priority
+  className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 md:right-6 z-10"
+/>
 
-      {/* Curva exacta */}
-      <svg
-        viewBox="0 0 1200 168"
-        preserveAspectRatio="none"
-        xmlns="http://www.w3.org/2000/svg"
-        className="absolute bottom-0 left-0 right-0 w-full h-[168px] z-0"
-        aria-hidden
-      >
-        <path
-          d="M1200 0v168H0v-54.708c118.333 28.97 304 42.722 557 41.26C810 153.087 1024.333 101.57 1200 0z"
-          fill="#F2F4F7" // gris claro del fondo siguiente
-          fillRule="evenodd"
-        />
-      </svg>
+// SVG de la curva: que quede detrás
+<svg
+  viewBox="0 0 1200 168"
+  preserveAspectRatio="none"
+  xmlns="http://www.w3.org/2000/svg"
+  className="absolute bottom-0 left-0 right-0 w-full h-[168px] z-0"
+  aria-hidden
+>
+  <path
+    d="M1200 0v168H0v-54.708c118.333 28.97 304 42.722 557 41.26C810 153.087 1024.333 101.57 1200 0z"
+    fill="#F2F4F7"
+    fillRule="evenodd"
+  />
+</svg>
     </section>
   );
 }
