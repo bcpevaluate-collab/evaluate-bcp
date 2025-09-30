@@ -16,7 +16,7 @@ export default function Hero() {
 
       {/* Imagen alineada derecha y centrada */}
       <Image
-        src="/hero-illustration.png" // tu imagen
+        src="/hero-illustration.svg" // tu imagen
         alt="Préstamo online"
         width={180}
         height={180}
