@@ -1,24 +1,23 @@
 {
-  "name": "evaluatebcp",
+  "name": "bcp",
   "version": "1.0.0",
-  "main": "index.js",
+  "private": true,
+  "description": "",
+  "author": "",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bcpevaluate-collab/evaluate-bcp.git"
+  },
+  "bugs": {
+    "url": "https://github.com/bcpevaluate-collab/evaluate-bcp/issues"
+  },
+  "homepage": "https://github.com/bcpevaluate-collab/evaluate-bcp#readme",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/bcpevaluate-collab/evaluate-bcp.git"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/bcpevaluate-collab/evaluate-bcp/issues"
-  },
-  "homepage": "https://github.com/bcpevaluate-collab/evaluate-bcp#readme",
-  "description": "",
   "dependencies": {
     "@supabase/supabase-js": "^2.58.0",
     "next": "^14.2.33",
@@ -28,6 +27,9 @@
   "devDependencies": {
     "@types/node": "^24.6.0",
     "@types/react": "^19.1.16",
-    "typescript": "^5.9.2"
+    "typescript": "^5.9.2",
+    "tailwindcss": "^3.4.10",
+    "postcss": "^8.4.47",
+    "autoprefixer": "^10.4.20"
   }
 }
