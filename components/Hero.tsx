@@ -35,7 +35,7 @@ export default function Hero() {
 
       {/* Ilustración: derecha y centrada verticalmente, por encima de la curva */}
       <Image
-        src="/hero-illustration.png"
+        src="/hero-illustration.svg"
         alt="Préstamo online"
         width={160}            // ajusta 150–170 para igualar
         height={160}
