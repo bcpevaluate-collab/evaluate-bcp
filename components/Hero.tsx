@@ -6,9 +6,9 @@ export default function Hero() {
     <section
       className="relative overflow-hidden text-white pb-36"
       style={{
-        // gradiente muy parecido al real
+        // gradiente muy parecido al real (ligeramente más oscuro)
         background:
-          "linear-gradient(180deg, #0B3A8C 0%, #124092 45%, #1746A2 100%)",
+          "linear-gradient(180deg, #072C69 0%, #0B3A8C 58%, #0E4AA4 100%)",
       }}
     >
       {/* Contenido a la izquierda */}
@@ -19,7 +19,7 @@ export default function Hero() {
               Solicita tu
             </p>
 
-            {/* Título en 2 líneas: 32/40 Demi lh-1.25, max-width para forzar corte */}
+            {/* Título en 2 líneas: 32/40, Demi (600), lh 1.25 */}
             <h1 className="text-[32px] md:text-[40px] font-[600] leading-[1.25] mb-2 max-w-[22rem]">
               <span>Préstamo</span>
               <br className="block" />
@@ -33,17 +33,20 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* Ilustración: derecha y centrada verticalmente, por encima de la curva */}
+      {/* Ilustración: derecha + centrada vertical. Más pequeña. */}
       <Image
-        src="/hero-illustration.svg"
+        src="/hero-illustration.svg"    // tu SVG en /public
         alt="Préstamo online"
-        width={160}            // ajusta 150–170 para igualar
-        height={160}
+        width={180}
+        height={180}
         priority
-        className="pointer-events-none absolute right-3 md:right-6 top-1/2 -translate-y-1/2 z-10"
+        className="
+          pointer-events-none absolute right-3 md:right-6 top-1/2 -translate-y-1/2 z-10
+          w-[140px] h-auto md:w-[160px]
+        "
       />
 
-      {/* Curva EXACTA (la que nos pasaste) pintando el color de la sección siguiente */}
+      {/* Curva EXACTA pintando el color de la sección siguiente */}
       <svg
         viewBox="0 0 1200 168"
         preserveAspectRatio="none"
