@@ -19,7 +19,7 @@ export default function FormSection() {
 
   return (
     <section className="relative z-20 bg-[#F2F4F7]">
-      {/* Sube el form para que pise la curva */}
+      {/* solapa para que flote sobre la curva */}
       <div className="container-max -mt-20 md:-mt-24 pb-6">
         <div className="mx-auto max-w-2xl rounded-[18px] border border-[#CAD2DE] bg-white
                         shadow-[0_12px_30px_rgba(0,27,71,.18)] p-5 md:p-6">
@@ -52,10 +52,10 @@ export default function FormSection() {
               </select>
             </label>
 
-            {/* Si lo quieres ancho completo, añade w-full */}
+            {/* botón ancho completo como en BCP */}
             <button
-              className="inline-flex items-center justify-center rounded-full h-[46px] px-6
-                         bg-[#FF7A00] text-white font-semibold shadow hover:opacity-90 transition"
+              className="w-full h-[52px] rounded-full bg-[#FF7A00] text-white font-semibold
+                         shadow hover:opacity-90 transition"
               disabled={loading}
             >
               {loading ? "Procesando…" : "Empezar"}
@@ -63,7 +63,7 @@ export default function FormSection() {
           </form>
         </div>
 
-        {/* Badge de horario */}
+        {/* badge de horario */}
         <div className="mt-3 inline-flex items-center gap-2 bg-white/60 border border-[#CAD2DE]
                         text-[#1C2B3A] px-3 py-2 rounded-md text-[13px]">
           <span className="text-[#0B3A8C]">⏰</span>
