@@ -20,7 +20,7 @@ export default function FormSection() {
   return (
     <section className="relative z-20 bg-[#F2F4F7]">
       {/* sube un poco más para tapar la curva */}
-      <div className="container-max -mt-24 md:-mt-28 pb-6">
+      <div className="container-max -mt-16 md:-mt-20 pb-6">
         <div className="mx-auto max-w-2xl rounded-[18px] border border-[#CAD2DE] bg-white
                         shadow-[0_14px_36px_rgba(0,27,71,.20)] p-5 md:p-6">
           <h2 className="text-[22px] font-bold text-[#0E1B2A]">Préstamo 100% online</h2>
