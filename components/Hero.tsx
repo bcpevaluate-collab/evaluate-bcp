@@ -17,7 +17,7 @@ export default function Hero() {
           {/* Imagen */}
           <div className="col-span-12 md:col-span-5 relative mt-8 md:mt-0">
             <Image
-              src="/hero-illustration.png"
+              src="/hero-illustration.svg"
               alt="Préstamo online"
               width={140}
               height={140}
