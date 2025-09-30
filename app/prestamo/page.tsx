@@ -1,47 +1,54 @@
-// app/prestamo/page.tsx
 "use client";
 import { useState } from "react";
-import { createClient } from "@supabase/supabase-js";
 
+export default function Prestamo() {
+  const [amount, setAmount] = useState(7000);
+  const [payDay, setPayDay] = useState("02");
+  const [loading, setLoading] = useState(false);
+  const [ok, setOk] = useState<string | null>(null);
 
-const supabase = createClient(process.env.NEXT_PUBLIC_SUPABASE_URL!, process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!);
+  async function submit(e: React.FormEvent) {
+    e.preventDefault();
+    setLoading(true);
+    setOk(null);
+    try {
+      const res = await fetch("/api/simular", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ amount, payDay })
+      });
+      if (!res.ok) throw new Error("Error");
+      setOk("¡Listo! Hemos registrado tu simulación.");
+    } catch {
+      setOk("Hubo un problema. Intenta otra vez.");
+    } finally { setLoading(false); }
+  }
 
-
-export default function PrestamoPage() {
-const [amount, setAmount] = useState(7000);
-const [payDay, setPayDay] = useState(2);
-const [loading, setLoading] = useState(false);
-const [ok, setOk] = useState(false);
-
-
-const submit = async () => {
-setLoading(true);
-await fetch("/api/simular", { method: "POST", body: JSON.stringify({ amount, payDay }) });
-setOk(true);
-setLoading(false);
-};
-
-
-return (
-<div className="mx-auto max-w-3xl px-4 py-12">
-<div className="text-center mb-6 text-slate-500">1 de 6</div>
-<div className="card p-6">
-<h1 className="h2">Ingresa tu monto y fecha de pago</h1>
-<div className="mt-6 grid md:grid-cols-2 gap-4">
-<label className="block">
-<span className="text-sm font-medium">Ingresa tu monto</span>
-<input type="number" className="mt-1 w-full rounded-xl border px-3 py-2" value={amount} onChange={(e)=>setAmount(parseInt(e.target.value||"0"))} />
-</label>
-<label className="block">
-<span className="text-sm font-medium">Fecha de pago</span>
-<select className="mt-1 w-full rounded-xl border px-3 py-2" value={payDay} onChange={(e)=>setPayDay(parseInt(e.target.value))}>
-{Array.from({length:28},(_,i)=>i+1).map(d=> <option key={d} value={d}>{String(d).padStart(2,'0')} de cada mes</option>)}
-</select>
-</label>
-</div>
-<button onClick={submit} className="btn-cta mt-6" disabled={loading}>{loading?"Procesando…":"Empezar"}</button>
-{ok && <p className="mt-3 text-green-600">Datos registrados. Continúa al siguiente paso (mock).</p>}
-</div>
-</div>
-);
+  return (
+    <section className="bg-[color:var(--brand)] text-white">
+      <div className="container-max py-10">
+        <div className="text-center text-white/80 mb-3">1 de 6</div>
+        <div className="card p-6 bg-white text-slate-900 max-w-2xl mx-auto">
+          <h1 className="text-2xl md:text-3xl font-bold">Ingresa tu monto y fecha de pago</h1>
+          <form onSubmit={submit} className="mt-6 space-y-4">
+            <label className="block">
+              <span className="block text-sm mb-1">Ingresa tu monto</span>
+              <input className="input" type="number" value={amount} onChange={(e)=>setAmount(parseInt(e.target.value || "0"))} />
+            </label>
+            <label className="block">
+              <span className="block text-sm mb-1">Fecha de pago</span>
+              <select className="select" value={payDay} onChange={(e)=>setPayDay(e.target.value)}>
+                {["02","10","15","20","25","30"].map(d => <option key={d} value={d}>{d} de cada mes</option>)}
+              </select>
+            </label>
+            <button className="btn-cta" disabled={loading}>{loading ? "Procesando…" : "Empezar"}</button>
+          </form>
+          {ok && <p className="mt-3 text-green-600">{ok}</p>}
+        </div>
+        <div className="container-max pb-6 text-white/80 text-sm mt-4">
+          Horario de atención: Lun a Dom de 5:00am – 12:00am (medianoche)
+        </div>
+      </div>
+    </section>
+  );
 }

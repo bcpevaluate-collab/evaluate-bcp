@@ -3,21 +3,12 @@
 @tailwind components;
 @tailwind utilities;
 
+:root { --brand: #003A8C; --brand2: #002C6A; --cta: #FF7A00; }
 
-:root {
---brand: #0f3d8f; /* azul aproximado */
---brand-dark: #0a2a64;
---accent: #ff7a00; /* naranja CTA */
---text: #0e1b2a; /* gris/azul oceano */
-}
+body { @apply text-slate-900 antialiased bg-white; }
 
-
-body { @apply text-[#0e1b2a] antialiased; }
-
-
-.btn-cta { @apply bg-[color:var(--accent)] text-white rounded-full px-6 py-3 font-semibold; }
-.link { @apply text-[color:var(--accent)] hover:underline; }
-.h1 { @apply text-4xl md:text-5xl font-bold tracking-tight; }
-.h2 { @apply text-3xl md:text-4xl font-semibold; }
-.lead { @apply text-lg text-slate-600; }
-.card { @apply rounded-2xl border border-slate-200 shadow-sm bg-white; }
+.container-max { @apply max-w-6xl mx-auto px-4; }
+.btn-cta { @apply inline-flex items-center justify-center rounded-full bg-[color:var(--cta)] px-6 py-3 text-white font-semibold shadow hover:opacity-90 transition; }
+.card { @apply rounded-2xl shadow-sm border border-slate-100 bg-white; }
+.input { @apply w-full rounded-xl border border-slate-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[color:var(--brand)]; }
+.select { @apply w-full rounded-xl border border-slate-300 px-4 py-3 bg-white focus:outline-none focus:ring-2 focus:ring-[color:var(--brand)]; }

@@ -1,22 +1,19 @@
-// components/Navbar.tsx
-import Image from "next/image";
 import Link from "next/link";
 
-
 export default function Navbar() {
-return (
-<header className="bg-[color:var(--brand)] text-white">
-<div className="mx-auto max-w-6xl px-4 h-14 flex items-center justify-between">
-<Link href="/" className="flex items-center gap-2">
-<Image src="/placeholder-logo.svg" alt="Banco Demo" width={36} height={20} />
-<span className="font-bold">BDP</span>
-</Link>
-<nav className="hidden md:flex items-center gap-6 text-sm">
-<Link href="/prestamo" className="hover:underline">Préstamo Online</Link>
-<Link href="/beneficios" className="hover:underline">Beneficios</Link>
-<Link href="/preguntas-frecuentes" className="hover:underline">Preguntas frecuentes</Link>
-</nav>
-</div>
-</header>
-);
+  return (
+    <header className="bg-[color:var(--brand)] text-white">
+      <div className="container-max h-14 flex items-center justify-between">
+        <div className="flex items-center gap-2">
+          <div className="h-6 w-6 rounded-sm bg-[color:var(--cta)]" />
+          <span className="font-bold tracking-wide">Evaluate BCP</span>
+        </div>
+        <nav className="hidden md:flex gap-8 text-sm">
+          <Link href="/prestamo" className="hover:opacity-90">Préstamo online</Link>
+          <Link href="/beneficios" className="hover:opacity-90">Beneficios</Link>
+          <Link href="/#faq" className="hover:opacity-90">Preguntas frecuentes</Link>
+        </nav>
+      </div>
+    </header>
+  );
 }
