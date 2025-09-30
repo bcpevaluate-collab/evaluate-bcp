@@ -3,9 +3,9 @@ import Benefits from "@/components/Benefits";
 import FAQ from "@/components/FAQ";
 import CTASticky from "@/components/CTASticky";
 
-export default function Page() {
+export default function Page(){
   return (
-    <div>
+    <>
       <Hero />
       <Benefits />
       <section id="faq" className="container-max py-10">
@@ -13,6 +13,6 @@ export default function Page() {
         <FAQ />
       </section>
       <CTASticky />
-    </div>
+    </>
   );
 }

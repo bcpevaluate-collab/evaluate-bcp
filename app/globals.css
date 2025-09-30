@@ -1,14 +1,48 @@
-/* app/globals.css */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-:root { --brand: #003A8C; --brand2: #002C6A; --cta: #FF7A00; }
+/* Paleta casi 1:1 */
+:root{
+  --brand:#0B3A8C;      /* azul primario */
+  --brand-deep:#072C69; /* azul más profundo para hero */
+  --cta:#FF7A00;        /* naranja botón */
+  --ink:#0E1B2A;        /* texto */
+  --line:#CAD2DE;       /* bordes claros */
+  --field:#F4F6FA;      /* fondo inputs al focus */
+}
 
-body { @apply text-slate-900 antialiased bg-white; }
+html,body{ height:100%; }
+body{ @apply antialiased text-[color:var(--ink)] bg-white; }
 
-.container-max { @apply max-w-6xl mx-auto px-4; }
-.btn-cta { @apply inline-flex items-center justify-center rounded-full bg-[color:var(--cta)] px-6 py-3 text-white font-semibold shadow hover:opacity-90 transition; }
-.card { @apply rounded-2xl shadow-sm border border-slate-100 bg-white; }
-.input { @apply w-full rounded-xl border border-slate-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[color:var(--brand)]; }
-.select { @apply w-full rounded-xl border border-slate-300 px-4 py-3 bg-white focus:outline-none focus:ring-2 focus:ring-[color:var(--brand)]; }
+/* Contenedor común */
+.container-max{ @apply max-w-[1040px] mx-auto px-4; }
+
+/* Tarjeta */
+.card{ @apply rounded-[18px] border border-[color:var(--line)] bg-white shadow-[0_8px_28px_rgba(0,0,0,.08)]; }
+
+/* Inputs */
+.input{
+  @apply w-full h-[52px] rounded-[12px] border border-[color:var(--line)] px-4
+         placeholder:text-slate-400 outline-none;
+}
+.input:focus{
+  @apply ring-2 ring-[color:var(--brand)] bg-[color:var(--field)];
+}
+
+/* Select */
+.select{ @apply input bg-white; }
+
+/* Botón CTA (pastilla) */
+.btn-cta{
+  @apply inline-flex items-center justify-center rounded-full h-[46px] px-6
+         bg-[color:var(--cta)] text-white font-semibold shadow
+         hover:opacity-90 transition;
+}
+
+/* Sticky CTA inferior */
+.sticky-cta{
+  @apply fixed left-1/2 -translate-x-1/2 bottom-5 w-[92%] max-w-[560px]
+         rounded-full h-[54px] flex items-center justify-center
+         bg-[color:var(--cta)] text-white font-semibold shadow-xl;
+}
