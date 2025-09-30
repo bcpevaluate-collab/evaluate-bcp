@@ -14,7 +14,7 @@ export default function Hero() {
         <p className="mt-2 text-lg md:text-xl">y recíbelo al instante</p>
       </div>
 
-      // Imagen: súbela por encima de la curva y céntrala a la derecha
+      
 <Image
   src="/hero-illustration.svg"
   alt="Préstamo online"
@@ -24,7 +24,7 @@ export default function Hero() {
   className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 md:right-6 z-10"
 />
 
-// SVG de la curva: que quede detrás
+
 <svg
   viewBox="0 0 1200 168"
   preserveAspectRatio="none"
