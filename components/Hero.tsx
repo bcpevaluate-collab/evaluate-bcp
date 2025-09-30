@@ -19,7 +19,7 @@ export default function Hero() {
           {/* Ilustración (más pequeña, arriba-derecha) */}
           <div className="col-span-12 md:col-span-5 relative mt-6 md:mt-0">
             <Image
-              src="/hero-illustration.png"     // pon aquí tu archivo (png/svg) en /public
+              src="/hero-illustration.svg"     // pon aquí tu archivo (png/svg) en /public
               width={180}                       // ajusta 160–200 si necesitas afinar
               height={180}
               alt="Ilustración préstamo online"
