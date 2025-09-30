@@ -1,13 +1,12 @@
-
 {
   "name": "evaluatebcp",
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-  "dev": "next dev",
-  "build": "next build",
-  "start": "next start"
-},
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/bcpevaluate-collab/evaluate-bcp.git"
@@ -21,6 +20,7 @@
   "homepage": "https://github.com/bcpevaluate-collab/evaluate-bcp#readme",
   "description": "",
   "dependencies": {
+    "@supabase/supabase-js": "^2.58.0",
     "next": "^14.2.33",
     "react": "^18.3.1",
     "react-dom": "^18.3.1"
