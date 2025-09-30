@@ -1,0 +1,23 @@
+/* app/globals.css */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+:root {
+--brand: #0f3d8f; /* azul aproximado */
+--brand-dark: #0a2a64;
+--accent: #ff7a00; /* naranja CTA */
+--text: #0e1b2a; /* gris/azul oceano */
+}
+
+
+body { @apply text-[#0e1b2a] antialiased; }
+
+
+.btn-cta { @apply bg-[color:var(--accent)] text-white rounded-full px-6 py-3 font-semibold; }
+.link { @apply text-[color:var(--accent)] hover:underline; }
+.h1 { @apply text-4xl md:text-5xl font-bold tracking-tight; }
+.h2 { @apply text-3xl md:text-4xl font-semibold; }
+.lead { @apply text-lg text-slate-600; }
+.card { @apply rounded-2xl border border-slate-200 shadow-sm bg-white; }
