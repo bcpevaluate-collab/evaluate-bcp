@@ -5,7 +5,7 @@ import Footer from "@/components/Footer";
 
 
 export const metadata = {
-title: "Préstamo 100% Online — Banco Demo",
+title: "Dinero al instante|Pide un préstamo",
 description: "Solicita tu préstamo 100% online y recíbelo al instante.",
 };
 
