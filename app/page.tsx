@@ -4,7 +4,7 @@ import FormSection from "@/components/FormSection";
 import StepsSlider from "@/components/StepsSlider";
 import Benefits from "@/components/Benefits";
 import FAQ from "@/components/FAQ";
-import CTABox from "@/components/CTABox";   // 👈 nuevo import
+import CTABox from "@/components/CTABox";
 import CTASticky from "@/components/CTASticky";
 
 export default function Page() {
@@ -18,11 +18,16 @@ export default function Page() {
       {/* Sección: Obtén tu préstamo BCP online (slider 1–6) */}
       <StepsSlider />
 
-      <section id="faq" className="container-max py-10">
+      {/* ✅ Título visible y en azul */}
+      <section id="faq" className="container-max pt-10 pb-6">
+        <h2 className="text-[#0B3A8C] font-[600] leading-tight
+                       text-[28px] md:text-[32px] mb-6">
+          Preguntas frecuentes
+        </h2>
         <FAQ />
       </section>
 
-      {/* ✅ Nueva sección CTA debajo de FAQ */}
+      {/* ✅ CTA con aire y bordes redondeados */}
       <CTABox />
 
       <CTASticky />

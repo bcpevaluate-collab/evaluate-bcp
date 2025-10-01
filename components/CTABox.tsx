@@ -1,27 +1,51 @@
 // components/CTABox.tsx
 import Image from "next/image";
+import Link from "next/link";
 
 export default function CTABox() {
   return (
-    <section className="bg-[#0B3A8C] rounded-lg p-6 md:p-10 text-center text-white flex flex-col md:flex-row items-center justify-between gap-6 mt-10">
-      {/* Imagen SVG */}
-      <div className="flex-shrink-0">
-        <Image
-          src="/illustrations/ahora.svg"
-          alt="Préstamo BCP"
-          width={160}
-          height={160}
-        />
-      </div>
+    <section className="mt-8 mb-12">
+      <div className="container-max">
+        <div
+          className="rounded-[24px] md:rounded-[28px] overflow-hidden
+                     bg-[#0B3A8C] text-white shadow-[0_10px_30px_rgba(0,0,0,.12)]
+                     px-6 py-8 md:px-10 md:py-10"
+        >
+          <div className="flex items-center gap-6">
+            <Image
+              src="/ahora.svg"     // tu SVG
+              alt=""
+              width={140}
+              height={140}
+              className="shrink-0"
+              priority
+            />
+            <div className="flex-1">
+              <p className="font-[600] leading-tight
+                            text-[20px] md:text-[24px]">
+                ¡Que esperas! Adquiere tu préstamo BCP online y
+                obtén tu dinero al instante
+              </p>
 
-      {/* Texto + Botón */}
-      <div className="flex flex-col items-center md:items-start text-center md:text-left max-w-lg">
-        <p className="text-lg md:text-xl font-semibold leading-snug">
-          ¡Que esperas! Adquiere tu préstamo BCP online y obtén tu dinero al instante
-        </p>
-        <button className="mt-5 bg-[#FF6200] text-white px-6 py-3 rounded-full font-semibold hover:bg-[#e65700] transition">
-          Solicita tu préstamo
-        </button>
+              <div className="mt-5 flex flex-col sm:flex-row gap-3">
+                <Link
+                  href="#form" // si quieres que haga scroll al formulario
+                  className="rounded-full bg-[#FF7A00] text-white font-semibold
+                             h-[46px] px-6 flex items-center justify-center"
+                >
+                  Solicita tu préstamo
+                </Link>
+                <Link
+                  href="#"
+                  className="rounded-full bg-white/10 text-white font-semibold
+                             h-[46px] px-6 flex items-center justify-center"
+                >
+                  Ver mi préstamo y cuotas
+                </Link>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
   );
