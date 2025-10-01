@@ -7,6 +7,7 @@ import FormSection from "@/components/FormSection";
 const StepsSlider = dynamic(() => import("@/components/StepsSlider"), { ssr: false });
 const FAQ = dynamic(() => import("@/components/FAQ"), { ssr: false });
 const CTABox = dynamic(() => import("@/components/CTABox"), { ssr: false });
+const LegalNote = dynamic(() => import("@/components/LegalNote"), { ssr: false }); // 👈 nuevo
 const CTASticky = dynamic(() => import("@/components/CTASticky"), { ssr: false });
 
 export default function Page() {
@@ -23,6 +24,10 @@ export default function Page() {
       </section>
 
       <CTABox />
+
+      {/* Caja legal */}
+      <LegalNote />
+
       <CTASticky />
     </>
   );
