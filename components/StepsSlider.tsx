@@ -71,25 +71,44 @@ export default function StepsSlider() {
         </p>
 
         <div ref={containerRef} className="relative mx-auto max-w-[380px]">
-          <button
-            aria-label="Anterior"
-            onClick={prev}
-            className="absolute -left-7 top-1/2 -translate-y-1/2 z-10 grid place-items-center w-9 h-9 rounded-full bg-white shadow-md border border-[#E1E6EF] hover:bg-[#f7f9fc]"
-          >
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
-              <path d="M15 19l-7-7 7-7" stroke="#0B3A8C" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-            </svg>
-          </button>
+          {/* Flecha izquierda */}
+<button
+  aria-label="Anterior"
+  onClick={prev}
+  className="absolute -left-7 top-1/2 -translate-y-1/2 z-10 grid place-items-center 
+             w-9 h-9 rounded-full bg-white shadow-md border border-[#FF7A00] 
+             hover:bg-[#fff4eb] transition"
+>
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+    <path
+      d="M15 19l-7-7 7-7"
+      stroke="#FF7A00"    // 👈 Naranja
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+  </svg>
+</button>
 
-          <button
-            aria-label="Siguiente"
-            onClick={next}
-            className="absolute -right-7 top-1/2 -translate-y-1/2 z-10 grid place-items-center w-9 h-9 rounded-full bg-white shadow-md border border-[#E1E6EF] hover:bg-[#f7f9fc]"
-          >
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
-              <path d="M9 5l7 7-7 7" stroke="#0B3A8C" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-            </svg>
-          </button>
+{/* Flecha derecha */}
+<button
+  aria-label="Siguiente"
+  onClick={next}
+  className="absolute -right-7 top-1/2 -translate-y-1/2 z-10 grid place-items-center 
+             w-9 h-9 rounded-full bg-white shadow-md border border-[#FF7A00] 
+             hover:bg-[#fff4eb] transition"
+>
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+    <path
+      d="M9 5l7 7-7 7"
+      stroke="#FF7A00"    // 👈 Naranja
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+  </svg>
+</button>
+
 
           <div
             className="rounded-[28px] bg-white shadow-[0_4px_24px_rgba(0,0,0,.08)] p-3 md:p-4"
