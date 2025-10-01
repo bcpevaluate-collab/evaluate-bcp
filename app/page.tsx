@@ -1,9 +1,10 @@
 // app/page.tsx
 import Hero from "@/components/Hero";
 import FormSection from "@/components/FormSection";
-import StepsSlider from "@/components/StepsSlider";   // 👈 aquí está el nuevo
+import StepsSlider from "@/components/StepsSlider";
 import Benefits from "@/components/Benefits";
 import FAQ from "@/components/FAQ";
+import CTABox from "@/components/CTABox";   // 👈 nuevo import
 import CTASticky from "@/components/CTASticky";
 
 export default function Page() {
@@ -18,11 +19,11 @@ export default function Page() {
       <StepsSlider />
 
       <section id="faq" className="container-max py-10">
-  <h2 className="text-3xl font-bold mb-6 text-[#0B3A8C]">
-    Preguntas frecuentes
-  </h2>
-  <FAQ />
-</section>
+        <FAQ />
+      </section>
+
+      {/* ✅ Nueva sección CTA debajo de FAQ */}
+      <CTABox />
 
       <CTASticky />
     </>
