@@ -47,7 +47,8 @@ export default function FormSection() {
   };
 
   return (
-    <section className="relative z-20 bg-[#F2F4F7]">
+    // ✅ Aquí agregamos el id="form"
+    <section id="form" className="relative z-20 bg-[#F2F4F7]">
       {/* tarjeta “pegada” a la curva */}
       <div className="container-max -mt-12 md:-mt-16 pb-6">
         <div className="card-frm mx-auto max-w-[640px] px-5 md:px-6 py-5 md:py-6">

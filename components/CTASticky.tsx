@@ -1,7 +1,18 @@
-export default function CTASticky(){
+// components/CTASticky.tsx
+export default function CTASticky() {
+  const scrollToForm = () => {
+    const form = document.getElementById("form");
+    if (form) {
+      form.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   return (
-    <a href="/prestamo" className="sticky-cta">
-      Ver mi préstamo y cuotas
-    </a>
+    <div
+      className="sticky-cta"
+      onClick={scrollToForm}
+    >
+      Solicita tu préstamo
+    </div>
   );
 }
