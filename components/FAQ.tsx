@@ -18,21 +18,27 @@ export default function FAQ() {
 
   return (
     <div className="space-y-2">
+      <h2 className="text-2xl md:text-3xl font-bold mb-6 text-[#0B3A8C]">
+        Preguntas frecuentes
+      </h2>
+
       {faqs.map((item, i) => {
         const isOpen = open === i;
         return (
           <div
             key={i}
-            className={`border rounded-md overflow-hidden transition 
-                       ${isOpen ? "border-[#0B3A8C]" : "border-[#CAD2DE]"}`}
+            className={`flex flex-col border rounded-md overflow-hidden transition bg-white`}
           >
             <button
-              className="w-full flex justify-between items-center px-4 py-3 text-left text-[15px] font-medium text-[#0E1B2A]"
+              className={`w-full flex justify-between items-center px-4 py-3 text-left text-[15px] font-medium
+                border-l-4 ${
+                  isOpen
+                    ? "border-l-[#0B3A8C] text-[#0B3A8C]"
+                    : "border-l-[#0B3A8C] text-[#0E1B2A]"
+                }`}
               onClick={() => setOpen(isOpen ? null : i)}
             >
-              <span className={`${isOpen ? "text-[#0B3A8C]" : ""}`}>
-                {item.q}
-              </span>
+              <span>{item.q}</span>
               <svg
                 className={`w-4 h-4 transform transition-transform ${
                   isOpen ? "rotate-180 text-[#0B3A8C]" : "text-gray-500"
