@@ -24,13 +24,89 @@ html, body { font-family: var(--bcp-font); }
 
 /* Paleta casi 1:1 */
 :root{
-  --brand:#0B3A8C;      /* azul primario */
-  --brand-deep:#072C69; /* azul más profundo para hero */
-  --cta:#FF7A00;        /* naranja botón */
-  --ink:#0E1B2A;        /* texto */
-  --line:#CAD2DE;       /* bordes claros */
-  --field:#F4F6FA;      /* fondo inputs al focus */
+  --brand:#0B3A8C;           /* primario */
+  --brand-700:#002A8D;       /* primary-700 del original */
+  --ink:#0E1B2A;             /* texto base */
+  --line:#CAD2DE;            /* borde inputs */
+  --badge-bg:#EAF1FF;        /* fondo horario */
+  --badge-border:#CFE0FF;    /* borde horario */
+  --placeholder:#7F8FA4;     /* placeholder inputs */
+  --cta:#FF7A00;             /* naranja botón */
 }
+
+/* Tarjeta contenedora (radio + sombra suaves) */
+.card-frm {
+  border:1px solid var(--line);
+  border-radius:22px;
+  background:#fff;
+  box-shadow:0 18px 28px rgba(0,27,71,.14);
+}
+
+/* Input “idéntico” (alto 56, radio 12, borde gris) */
+.input-bcp {
+  height:56px;
+  border:1px solid var(--line);
+  border-radius:12px;
+  padding:0 16px;
+  outline:0;
+  background:#fff;
+  color:var(--ink);
+}
+.input-bcp::placeholder { color:var(--placeholder); }
+.input-bcp:focus {
+  box-shadow:0 0 0 2px var(--brand);
+  border-color:var(--brand);
+}
+.input-bcp.error {
+  border-color:#DD1831;
+  box-shadow:0 0 0 2px #DD1831;
+}
+
+/* Select “idéntico” — usamos el mismo look que input */
+.select-bcp {
+  @apply input-bcp;
+}
+
+/* Chevron del select */
+.chev {
+  width:20px; height:20px;
+  fill:#2F476B;
+}
+
+/* Botón pastilla (alto 56, radio 28, ancho 100%) */
+.btn-bcp {
+  height:56px;
+  border-radius:28px;
+  background:var(--cta);
+  color:#fff;
+  font-weight:600;
+  width:100%;
+  box-shadow:0 8px 16px rgba(255,122,0,.25);
+}
+.btn-bcp:hover { opacity:.92; }
+
+/* Badge “Horario de atención” */
+.badge-hours {
+  background:var(--badge-bg);
+  border:1px solid var(--badge-border);
+  border-radius:16px;
+  padding:14px 16px;
+}
+
+/* Texto del badge (tamaños calcados) */
+.badge-hours p { 
+  font-size:15px; line-height:22px; color:#113B8D;
+}
+.badge-hours b { color:var(--brand-700); }
+
+/* Dot azul (si lo prefieres en vez del reloj) */
+.dot-blue {
+  width:10px;height:10px;border-radius:999px;background:var(--brand-700);
+}
+
+/* Separaciones verticales “como foto”: 20–24px */
+.stack-20 > * + * { margin-top:20px; }
+.stack-24 > * + * { margin-top:24px; }
 
 html,body{ height:100%; }
 body{ @apply antialiased text-[color:var(--ink)] bg-white; }
