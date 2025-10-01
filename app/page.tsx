@@ -18,9 +18,11 @@ export default function Page() {
       <StepsSlider />
 
       <section id="faq" className="container-max py-10">
-        <h2 className="text-3xl font-bold mb-6">Preguntas frecuentes</h2>
-        <FAQ />
-      </section>
+  <h2 className="text-3xl font-bold mb-6 text-[#0B3A8C]">
+    Preguntas frecuentes
+  </h2>
+  <FAQ />
+</section>
 
       <CTASticky />
     </>
