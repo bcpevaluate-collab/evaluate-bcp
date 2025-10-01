@@ -11,8 +11,8 @@ const DAY_OPTIONS: DayOption[] = [
 ];
 
 export default function FormSection() {
-  const [amount, setAmount] = useState<string>("7000");
-  const [payDay, setPayDay] = useState<DayOption | null>(DAY_OPTIONS[0]);
+  const [amount, setAmount] = useState<string>("");
+  const [payDay, setPayDay] = useState<DayOption | null>(null);
   const [open, setOpen] = useState(false);
 
   // errores
@@ -33,36 +33,44 @@ export default function FormSection() {
   function validate(): boolean {
     let ok = true;
     const n = Number(amount || 0);
-    if (isNaN(n) || n < 100) {
-      setAmountError(n <= 0 ? "Este campo es requerido." : "El monto mínimo es S/ 100");
+
+    if (!amount) {
+      setAmountError("Este campo es requerido.");
+      ok = false;
+    } else if (isNaN(n) || n < 100) {
+      setAmountError("El monto mínimo es S/ 100");
       ok = false;
     } else {
       setAmountError("");
     }
+
     if (!payDay) {
       setDayError("Este campo es requerido.");
       ok = false;
     } else {
       setDayError("");
     }
+
     return ok;
   }
 
   async function submit(e: React.FormEvent) {
     e.preventDefault();
     if (!validate()) return;
-    // simulación
-    await new Promise((r) => setTimeout(r, 500));
+    await new Promise((r) => setTimeout(r, 400));
   }
 
   return (
     <section className="relative z-20 bg-[#F2F4F7]">
+      {/* solapa sobre la curva */}
       <div className="container-max -mt-12 md:-mt-16 pb-6">
         <div className="mx-auto max-w-2xl rounded-[22px] border border-[color:var(--line)] bg-white shadow-[0_12px_30px_rgba(0,27,71,.18)] p-5 md:p-6">
-          <h2 className="text-[22px] font-[600] text-[#0E1B2A]">Préstamo 100% online</h2>
-          <p className="mt-1 text-slate-600">Ingresa tu monto y fecha de pago</p>
+          {/* =====  LEYENDA DENTRO DE LA TARJETA (como el original)  ===== */}
+          <p className="text-[16px] text-[#8FA0B4] mb-4">
+            Ingresa tu monto y fecha de pago
+          </p>
 
-          <form onSubmit={submit} className="mt-4 space-y-5">
+          <form onSubmit={submit} className="space-y-5">
             {/* MONTO */}
             <div>
               <label
@@ -72,6 +80,7 @@ export default function FormSection() {
               >
                 Ingresa tu monto
               </label>
+
               <input
                 inputMode="numeric"
                 placeholder="¿Cuánto necesitas? (S/)"
@@ -80,11 +89,12 @@ export default function FormSection() {
                     amountError
                       ? "border-[#DD1831] focus:ring-2 focus:ring-[#DD1831]"
                       : "border-[color:var(--line)] focus:ring-2 focus:ring-[color:var(--brand)]"
-                  }`}
+                  } placeholder:text-[#9AA8B8]`}
                 value={amount}
                 onChange={(e) => setAmount(e.target.value)}
-                onBlur={() => validate()}
+                onBlur={validate}
               />
+
               {amountError && (
                 <p className="mt-2 text-[#DD1831] text-[14px]">{amountError}</p>
               )}
@@ -112,9 +122,14 @@ export default function FormSection() {
                       : "border-[color:var(--line)] focus:ring-2 focus:ring-[color:var(--brand)]"
                   }`}
               >
-                <span className="text-[16px]">
+                <span
+                  className={`text-[16px] ${
+                    payDay ? "text-[#0E1B2A]" : "text-[#9AA8B8]"
+                  }`}
+                >
                   {payDay ? payDay.label : "Selecciona una fecha"}
                 </span>
+
                 {/* flecha */}
                 <svg
                   className={`w-5 h-5 transition-transform ${
@@ -126,7 +141,6 @@ export default function FormSection() {
                 </svg>
               </button>
 
-              {/* menú dropdown */}
               {open && (
                 <div
                   role="listbox"
@@ -154,7 +168,7 @@ export default function FormSection() {
               )}
             </div>
 
-            {/* BOTÓN CTA */}
+            {/* CTA */}
             <button
               className="w-full h-[58px] rounded-full bg-[#FF7A00] text-white font-semibold shadow hover:opacity-90 transition text-[18px]"
             >
@@ -165,7 +179,6 @@ export default function FormSection() {
 
         {/* Badge de horario */}
         <div className="mt-4 rounded-[16px] border border-[color:var(--line)] bg-[#EAF1FF] text-[#113B8D] px-4 py-3 inline-flex items-center gap-3">
-          {/* ícono reloj azul */}
           <svg width="22" height="22" viewBox="0 0 24 24" className="fill-[#0B3A8C]">
             <path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm1 10.414V7h-2v6l5 3 .999-1.732L13 12.414z"/>
           </svg>
