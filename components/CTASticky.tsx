@@ -1,4 +1,6 @@
 // components/CTASticky.tsx
+"use client";
+
 export default function CTASticky() {
   const scrollToForm = () => {
     const form = document.getElementById("form");
