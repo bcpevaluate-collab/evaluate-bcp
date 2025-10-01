@@ -1,35 +1,28 @@
 // app/page.tsx
+import dynamic from "next/dynamic";
 import Hero from "@/components/Hero";
-import FormSection from "@/components/FormSection";
-import StepsSlider from "@/components/StepsSlider";
 import Benefits from "@/components/Benefits";
-import FAQ from "@/components/FAQ";
-import CTABox from "@/components/CTABox";
-import CTASticky from "@/components/CTASticky";
+import FormSection from "@/components/FormSection";
+
+const StepsSlider = dynamic(() => import("@/components/StepsSlider"), { ssr: false });
+const FAQ = dynamic(() => import("@/components/FAQ"), { ssr: false });
+const CTABox = dynamic(() => import("@/components/CTABox"), { ssr: false });
+const CTASticky = dynamic(() => import("@/components/CTASticky"), { ssr: false });
 
 export default function Page() {
   return (
     <>
       <Hero />
       <FormSection />
-
       <Benefits />
-
-      {/* Sección: Obtén tu préstamo BCP online (slider 1–6) */}
       <StepsSlider />
 
-      {/* ✅ Título visible y en azul */}
-      <section id="faq" className="container-max pt-10 pb-6">
-        <h2 className="text-[#0B3A8C] font-[600] leading-tight
-                       text-[28px] md:text-[32px] mb-6">
-          Preguntas frecuentes
-        </h2>
+      <section id="faq" className="container-max py-10">
+        <h2 className="text-3xl font-bold mb-6 text-[#0B3A8C]">Preguntas frecuentes</h2>
         <FAQ />
       </section>
 
-      {/* ✅ CTA con aire y bordes redondeados */}
       <CTABox />
-
       <CTASticky />
     </>
   );
