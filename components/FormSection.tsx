@@ -3,7 +3,6 @@
 import { useEffect, useRef, useState } from "react";
 
 type DayOption = { value: string; label: string };
-
 const DAY_OPTIONS: DayOption[] = [
   { value: "02", label: "02 de cada mes" },
   { value: "15", label: "15 de cada mes" },
@@ -15,7 +14,6 @@ export default function FormSection() {
   const [payDay, setPayDay] = useState<DayOption | null>(null);
   const [open, setOpen] = useState(false);
 
-  // errores
   const [amountError, setAmountError] = useState<string>("");
   const [dayError, setDayError] = useState<string>("");
 
@@ -30,7 +28,7 @@ export default function FormSection() {
     return () => document.removeEventListener("mousedown", onClickOutside);
   }, []);
 
-  function validate(): boolean {
+  const validate = () => {
     let ok = true;
     const n = Number(amount || 0);
 
@@ -52,27 +50,31 @@ export default function FormSection() {
     }
 
     return ok;
-  }
+  };
 
-  async function submit(e: React.FormEvent) {
+  const submit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!validate()) return;
     await new Promise((r) => setTimeout(r, 400));
-  }
+  };
 
   return (
     <section className="relative z-20 bg-[#F2F4F7]">
-      {/* solapa sobre la curva */}
+      {/* la tarjeta solapada sobre la curva */}
       <div className="container-max -mt-12 md:-mt-16 pb-6">
-        <div className="mx-auto max-w-2xl rounded-[22px] border border-[color:var(--line)] bg-white shadow-[0_12px_30px_rgba(0,27,71,.18)] p-5 md:p-6">
-          {/* =====  LEYENDA DENTRO DE LA TARJETA (como el original)  ===== */}
+        <div className="mx-auto max-w-5xl rounded-[22px] border border-[color:var(--line)] bg-white shadow-[0_12px_30px_rgba(0,27,71,.18)] px-5 md:px-6 py-5 md:py-6">
+          {/* leyenda superior dentro de la tarjeta */}
           <p className="text-[16px] text-[#8FA0B4] mb-4">
             Ingresa tu monto y fecha de pago
           </p>
 
-          <form onSubmit={submit} className="space-y-5">
-            {/* MONTO */}
-            <div>
+          {/* === fila tipo bootstrap: columnas === */}
+          <form
+            onSubmit={submit}
+            className="flex flex-col md:flex-row md:items-center md:gap-4"
+          >
+            {/* Col 1: Monto */}
+            <div className="flex-1 mb-4 md:mb-0">
               <label
                 className={`block text-[15px] mb-2 ${
                   amountError ? "text-[#DD1831]" : "text-[#0E1B2A]"
@@ -80,7 +82,6 @@ export default function FormSection() {
               >
                 Ingresa tu monto
               </label>
-
               <input
                 inputMode="numeric"
                 placeholder="¿Cuánto necesitas? (S/)"
@@ -94,14 +95,17 @@ export default function FormSection() {
                 onChange={(e) => setAmount(e.target.value)}
                 onBlur={validate}
               />
-
-              {amountError && (
-                <p className="mt-2 text-[#DD1831] text-[14px]">{amountError}</p>
-              )}
+              <p className="mt-2 h-[20px] text-[14px]">
+                {amountError ? (
+                  <span className="text-[#DD1831]">{amountError}</span>
+                ) : (
+                  <span className="opacity-0">&nbsp;</span>
+                )}
+              </p>
             </div>
 
-            {/* FECHA DE PAGO (custom select) */}
-            <div ref={menuRef} className="relative">
+            {/* Col 2: Select Fecha */}
+            <div ref={menuRef} className="flex-1 mb-4 md:mb-0 relative">
               <label
                 className={`block text-[15px] mb-2 ${
                   dayError ? "text-[#DD1831]" : "text-[#0E1B2A]"
@@ -129,8 +133,6 @@ export default function FormSection() {
                 >
                   {payDay ? payDay.label : "Selecciona una fecha"}
                 </span>
-
-                {/* flecha */}
                 <svg
                   className={`w-5 h-5 transition-transform ${
                     open ? "rotate-180" : "rotate-0"
@@ -141,6 +143,7 @@ export default function FormSection() {
                 </svg>
               </button>
 
+              {/* menú opciones */}
               {open && (
                 <div
                   role="listbox"
@@ -163,21 +166,27 @@ export default function FormSection() {
                 </div>
               )}
 
-              {dayError && (
-                <p className="mt-2 text-[#DD1831] text-[14px]">{dayError}</p>
-              )}
+              <p className="mt-2 h-[20px] text-[14px]">
+                {dayError ? (
+                  <span className="text-[#DD1831]">{dayError}</span>
+                ) : (
+                  <span className="opacity-0">&nbsp;</span>
+                )}
+              </p>
             </div>
 
-            {/* CTA */}
-            <button
-              className="w-full h-[58px] rounded-full bg-[#FF7A00] text-white font-semibold shadow hover:opacity-90 transition text-[18px]"
-            >
-              Empezar
-            </button>
+            {/* Col 3: Botón (col-8 col-md-auto) */}
+            <div className="md:ml-4 md:self-start w-full md:w-auto">
+              <button
+                className="w-full md:w-auto min-w-[220px] h-[58px] rounded-full bg-[#FF7A00] text-white font-semibold px-10 shadow hover:opacity-90 transition text-[18px]"
+              >
+                Empezar
+              </button>
+            </div>
           </form>
         </div>
 
-        {/* Badge de horario */}
+        {/* Badge horario */}
         <div className="mt-4 rounded-[16px] border border-[color:var(--line)] bg-[#EAF1FF] text-[#113B8D] px-4 py-3 inline-flex items-center gap-3">
           <svg width="22" height="22" viewBox="0 0 24 24" className="fill-[#0B3A8C]">
             <path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm1 10.414V7h-2v6l5 3 .999-1.732L13 12.414z"/>
