@@ -142,3 +142,13 @@ body{ @apply antialiased text-[color:var(--ink)] bg-white; }
          rounded-full h-[54px] flex items-center justify-center
          bg-[color:var(--cta)] text-white font-semibold shadow-xl;
 }
+
+/* --- Benefits --- */
+.benefit-card{
+  display:flex; align-items:center; gap:14px;
+  padding: 14px 16px;
+  border:1px solid var(--bcp-line);          /* #CAD2DE */
+  border-radius:12px;
+  background:#fff;
+  box-shadow: 0 1px 0 rgba(0,0,0,.02);       /* toque muy sutil */
+}
