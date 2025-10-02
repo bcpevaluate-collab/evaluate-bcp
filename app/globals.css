@@ -348,4 +348,61 @@ body{ @apply antialiased text-[color:var(--ink)] bg-white; }
 }
 .icon-key:hover{ background:#F5F7FB; cursor:pointer; }
 
+/* Keypad contenedor */
+.keyboard-box{
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:18px;
+  box-shadow:0 16px 32px rgba(0,0,0,.15);
+  padding:12px;
+}
+.keyboard-body{
+  display:grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap:8px;
+}
+
+/* Celdas */
+.digit-key,
+.icon-key{
+  width:100%;
+  height:56px;
+  border:1px solid var(--line);
+  border-radius:12px;
+  background:#fff;
+  display:flex; align-items:center; justify-content:center;
+  position:relative;            /* para los .pixel */
+  transition: background .15s ease;
+}
+.digit-key:hover,
+.icon-key:hover{ background:#F5F7FB; cursor:pointer; }
+
+/* Puntitos decorativos */
+.pixel{
+  position:absolute;
+  width:4px; height:4px;        /* puntito real */
+  border-radius:9999px;
+  background:#CAD2DE;
+  opacity:.75;
+}
+
+/* Tipografía del dígito */
+.bcp-font-demi{ font-weight:600; }
+.onsurface-800{ color:#334155; }
+.title-sm{ font-size:17px; line-height:1; }
+
+/* Ocultar texto accesible (Vaciar/Cerrar) */
+.bcp-ffw-sr-only{
+  position:absolute !important;
+  width:1px !important;
+  height:1px !important;
+  padding:0 !important;
+  margin:-1px !important;
+  overflow:hidden !important;
+  clip:rect(0,0,0,0) !important;
+  white-space:nowrap !important;
+  border:0 !important;
+}
+
+
 
