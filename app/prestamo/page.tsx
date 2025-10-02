@@ -9,13 +9,17 @@ export default function Prestamo() {
   const [ok, setOk] = useState<string | null>(null);
   const router = useRouter();
 
-  async function submit(e: React.FormEvent) {
-    e.preventDefault();
-    setLoading(true);
-    setOk(null);
+  const goToStep2 = async () => {
     try {
-      // En el futuro puedes llamar a tu API de simulación si quieres
-      const params = new URLSearchParams({ amount: String(amount), payDay });
+      setLoading(true);
+      setOk(null);
+
+      // Construimos la URL al Paso 2
+      const params = new URLSearchParams({
+        amount: String(amount ?? ""),
+        payDay: String(payDay ?? ""),
+      });
+
       router.push(`/prestamo/validacion?${params.toString()}`);
     } catch (err) {
       console.error(err);
@@ -23,7 +27,7 @@ export default function Prestamo() {
     } finally {
       setLoading(false);
     }
-  }
+  };
 
   return (
     <section className="bg-[#0B3A8C] py-10">
@@ -32,7 +36,9 @@ export default function Prestamo() {
           <h1 className="text-2xl font-bold text-[#0B3A8C]">
             Elige tu monto y fecha de pago
           </h1>
-          <form onSubmit={submit} className="mt-4 grid md:grid-cols-3 gap-4">
+
+          {/* Quitamos dependencia del submit y usamos click directo */}
+          <div className="mt-4 grid md:grid-cols-3 gap-4">
             <label className="block">
               <span className="text-sm font-medium">Monto</span>
               <input
@@ -43,6 +49,7 @@ export default function Prestamo() {
                 className="mt-1 w-full border rounded-lg p-2"
               />
             </label>
+
             <label className="block">
               <span className="text-sm font-medium">Día de pago</span>
               <select
@@ -57,12 +64,20 @@ export default function Prestamo() {
                 ))}
               </select>
             </label>
-            <button className="btn-cta self-end" disabled={loading}>
+
+            <button
+              type="button"
+              onClick={goToStep2}
+              className="btn-cta self-end"
+              disabled={loading}
+            >
               {loading ? "Procesando…" : "Empezar"}
             </button>
-          </form>
+          </div>
+
           {ok && <p className="mt-3 text-green-600">{ok}</p>}
         </div>
+
         <div className="container-max pb-6 text-white/80 text-sm mt-4">
           Horario de atención: Lun a Dom de 5:00am – 12:00am (medianoche)
         </div>
