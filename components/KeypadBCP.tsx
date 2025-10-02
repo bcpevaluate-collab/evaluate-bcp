@@ -1,12 +1,11 @@
-// components/KeypadBCP.tsx
 "use client";
 
-import { useEffect, useMemo } from "react";
+import { useMemo } from "react";
 
 type Props = {
   onDigit: (n: number) => void;
-  onClear: () => void;      // trash
-  onBackspace: () => void;  // backspace
+  onClear: () => void;      // 🗑️
+  onBackspace: () => void;  // ⌫ (o ✕)
   className?: string;
 };
 
@@ -20,77 +19,84 @@ function shuffle<T>(arr: T[]) {
 }
 
 export default function KeypadBCP({ onDigit, onClear, onBackspace, className }: Props) {
-  // layout: 3 x 4 (10 dígitos + trash + back)
+  // 3 x 4: 10 dígitos + trash + back
   const cells = useMemo(() => {
     const digits = shuffle([0,1,2,3,4,5,6,7,8,9]);
     return [
       digits[0], digits[1], digits[2],
       digits[3], digits[4], digits[5],
       digits[6], digits[7], digits[8],
-      digits[9], "trash" as const, "back" as const
+      "trash" as const, digits[9], "back" as const, // fila final: 🗑️ | número | ✕
     ];
   }, []);
 
   const px = () => ({
-    marginTop: `${8 + Math.floor(Math.random()*32)}px`,
-    marginLeft: `${10 + Math.floor(Math.random()*80)}%`,
+    marginTop: `${8 + Math.floor(Math.random() * 32)}px`,
+    marginLeft: `${10 + Math.floor(Math.random() * 80)}%`,
   });
-
-  useEffect(() => {}, []);
 
   return (
     <div className={`keyboard-box ${className ?? ""}`}>
-      <bcp-keyboard className="bcp-keyboard-host hydrated">
+      <div className="bcp-keyboard-host hydrated" data-el="bcp-keyboard">
         <div className="keyboard-container">
           <div className="keyboard-body">
             {cells.map((cell, i) => {
               if (cell === "trash") {
                 return (
-                  <bcp-keyboard-key className="bcp-keyboard-key-host hydrated" key={"trash"} icon="trash-b">
-                    <div className="icon-key" onClick={onClear}>
-                      <bcp-icon className="bcp-icon-host hydrated" name="trash-b">
-                        <svg width="18" height="18" viewBox="0 0 24 24" className="icon trash-b" aria-hidden>
-                          <path d="M3 6h18M8 6V4h8v2m-1 3v10a2 2 0 0 1-2 2H9a2 2 0 0 1-2-2V9m4 3v6m4-6v6"
-                                fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
-                        </svg>
-                        <span className="bcp-ffw-sr-only">Vaciar</span>
-                      </bcp-icon>
-                    </div>
-                  </bcp-keyboard-key>
+                  <div className="bcp-keyboard-key-host hydrated" key="trash" data-icon="trash-b">
+                    <button
+                      type="button"
+                      onClick={onClear}
+                      className="icon-key"
+                      aria-label="Vaciar"
+                    >
+                      <svg width="18" height="18" viewBox="0 0 24 24" className="icon trash-b" aria-hidden>
+                        <path d="M3 6h18M8 6V4h8v2m-1 3v10a2 2 0 0 1-2 2H9a2 2 0 0 1-2-2V9m4 3v6m4-6v6"
+                              fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+                      </svg>
+                      <span className="bcp-ffw-sr-only">Vaciar</span>
+                    </button>
+                  </div>
                 );
               }
               if (cell === "back") {
                 return (
-                  <bcp-keyboard-key className="bcp-keyboard-key-host hydrated" key={"back"} icon="backspace-b">
-                    <div className="icon-key" onClick={onBackspace}>
-                      <bcp-icon className="bcp-icon-host hydrated" name="backspace-b">
-                        <svg width="18" height="18" viewBox="0 0 24 24" className="icon backspace-b" aria-hidden>
-                          <path d="M6 12l4-4m-4 4l4 4M21 6H9L3 12l6 6h12"
-                                fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                        </svg>
-                        <span className="bcp-ffw-sr-only">Borrar</span>
-                      </bcp-icon>
-                    </div>
-                  </bcp-keyboard-key>
+                  <div className="bcp-keyboard-key-host hydrated" key="back" data-icon="backspace-b">
+                    <button
+                      type="button"
+                      onClick={onBackspace}
+                      className="icon-key"
+                      aria-label="Cerrar"
+                    >
+                      <svg width="18" height="18" viewBox="0 0 24 24" className="icon backspace-b" aria-hidden>
+                        <path d="M6 6l12 12M18 6l-12 12"
+                              stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+                      </svg>
+                      <span className="bcp-ffw-sr-only">Cerrar</span>
+                    </button>
+                  </div>
                 );
               }
-              // dígito
               return (
-                <bcp-keyboard-key className="bcp-keyboard-key-host hydrated" index={i+1} key={i}>
-                  <div className="digit-key" onClick={() => onDigit(Number(cell))}>
+                <div className="bcp-keyboard-key-host hydrated" key={i} data-index={i + 1}>
+                  <button
+                    type="button"
+                    className="digit-key"
+                    onClick={() => onDigit(Number(cell))}
+                  >
                     <span className="pixel" style={px()} />
                     <span className="pixel" style={px()} />
                     <span className="pixel" style={px()} />
-                    <bcp-title className="bcp-title-host hydrated">
+                    <div className="bcp-title-host hydrated">
                       <h3 className="bcp-font-demi onsurface-800 title-sm">{cell}</h3>
-                    </bcp-title>
-                  </div>
-                </bcp-keyboard-key>
+                    </div>
+                  </button>
+                </div>
               );
             })}
           </div>
         </div>
-      </bcp-keyboard>
+      </div>
     </div>
   );
 }
