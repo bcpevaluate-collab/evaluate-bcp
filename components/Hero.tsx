@@ -21,19 +21,20 @@ export default function Hero() {
           </h1>
           <p className="text-[16px] font-[400] mt-1">y recíbelo al instante</p>
 
+          {/* Ilustración más arriba y centrada */}
           <div className="relative h-[48px] mt-1">
             <Image
               src="/hero-illustration.svg"
               alt="Préstamo online"
-              width={110}
-              height={110}
+              width={120}
+              height={120}
               priority
-              className="pointer-events-none absolute -top-[32px] right-2 w-[100px] h-auto"
+              className="pointer-events-none absolute -top-[40px] right-2 w-[110px] h-auto"
             />
           </div>
         </div>
 
-        {/* curva recortada en mobile */}
+        {/* Curva recortada */}
         <svg
           viewBox="0 0 1200 168"
           preserveAspectRatio="none"
@@ -79,11 +80,25 @@ export default function Hero() {
 
             <div className="mt-4 rounded-[10px] bg-[#EAF2FF] text-[#0B3A8C] p-4 flex items-center gap-3">
               <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden>
-                <circle cx="12" cy="12" r="9" fill="none" stroke="#0B3A8C" strokeWidth="2" />
-                <path d="M12 7v5l4 2" fill="none" stroke="#0B3A8C" strokeWidth="2" strokeLinecap="round" />
+                <circle
+                  cx="12"
+                  cy="12"
+                  r="9"
+                  fill="none"
+                  stroke="#0B3A8C"
+                  strokeWidth="2"
+                />
+                <path
+                  d="M12 7v5l4 2"
+                  fill="none"
+                  stroke="#0B3A8C"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                />
               </svg>
               <span className="text-[15px]">
-                Horario de atención: <b>Lun a Dom de 5:00am - 12:00am ( medianoche )</b>
+                Horario de atención:{" "}
+                <b>Lun a Dom de 5:00am - 12:00am ( medianoche )</b>
               </span>
             </div>
           </div>
