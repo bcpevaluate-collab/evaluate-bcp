@@ -53,21 +53,22 @@ export default function Hero() {
 <div className="hidden md:block pb-16">
   <div className="container-max relative z-10 pt-14">
     <div className="grid grid-cols-12 items-center">
-      {/* Texto izquierda */}
-      <div className="col-span-12 md:col-span-6">
-        <p className="text-[18px] mb-3 opacity-90">Solicita tu</p>
+      {/* Texto izquierda (desktop) */}
+<div className="col-span-12 md:col-span-6">
+  <p className="text-[18px] mb-3 opacity-90">Solicita tu</p>
 
-        {/* Título en una sola línea */}
-        <h1 className="font-[600] leading-[1.15] text-white">
-          <span className="block text-[56px] whitespace-nowrap">
-            Préstamo 100% online
-          </span>
-        </h1>
+  {/* 👇 Título en una sola línea */}
+  <h1 className="font-[600] leading-[1.2] text-white">
+    <span className="block text-[56px] whitespace-nowrap">
+      Préstamo 100% online
+    </span>
+  </h1>
 
-        <p className="mt-3 text-[20px] opacity-95">
-          y recíbelo al instante
-        </p>
-      </div>
+  {/* 👇 Subtítulo debajo */}
+  <p className="mt-3 text-[24px] font-[400] text-white opacity-95">
+    y recíbelo al instante
+  </p>
+</div>
 
       {/* Ilustración derecha */}
       <div className="col-span-12 md:col-span-6 relative h-[360px]">
