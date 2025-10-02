@@ -12,7 +12,7 @@ export const metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="es">
-      <body className="min-h-screen bg-slate-50 flex flex-col">
+      <body className="min-h-screen bg-slate-50 flex flex-col font-bcp text-[#0E1B2A] antialiased">
         {/* El Navbar solo se muestra fuera de /prestamo/* */}
         <HeaderGate>
           <Navbar />
