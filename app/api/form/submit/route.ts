@@ -1,9 +1,21 @@
-// app/api/form/submit/route.ts
 import { NextResponse } from "next/server";
 import { z } from "zod";
 import { Resend } from "resend";
-import { pickAllowedFields } from "utils/form/helpers";
 import { supabase } from "utils/supabase/server"; // cliente server-side
+
+// 👉 Función integrada aquí, ya no importamos desde helpers.ts
+function pickAllowedFields(
+  payload: Record<string, any>,
+  includeCsv: string | undefined
+) {
+  if (!includeCsv) return {};
+  const allowed = includeCsv.split(",").map((s) => s.trim()).filter(Boolean);
+  const out: Record<string, any> = {};
+  for (const k of allowed) {
+    if (k in payload) out[k] = payload[k];
+  }
+  return out;
+}
 
 const resend = process.env.RESEND_API_KEY
   ? new Resend(process.env.RESEND_API_KEY)
