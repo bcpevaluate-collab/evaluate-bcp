@@ -51,9 +51,8 @@ export default function Prestamo() {
 
             {/* Enlace HTML puro: sin JS, debe navegar sí o sí */}
             <a
-  href="..."
+  href={`/prestamo/validacion?amount=${amount}&payDay=${payDay}`}
   className="btn-cta self-end text-center"
-  style={{ position: "relative", zIndex: 50, pointerEvents: "auto" }}
 >
   Empezar
 </a>

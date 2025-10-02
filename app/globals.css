@@ -160,4 +160,26 @@ body{ @apply antialiased text-[color:var(--ink)] bg-white; }
   box-shadow: none;
 }
 
+/* ——— Parche anti-overlay ——— */
+
+/* Asegura que el CTA sticky no tape el contenido superior */
+.sticky-cta {
+  z-index: 20;            /* visible pero por debajo del contenido “activo” */
+  pointer-events: auto;   /* el propio sticky es clickeable */
+}
+
+/* El botón Empezar siempre por encima y clickeable */
+.btn-cta {
+  position: relative;     /* crea stacking context propio */
+  z-index: 50;            /* por encima del sticky */
+  pointer-events: auto;   /* por si algún contenedor tenía herencia rara */
+}
+
+/* (Opcional) si tienes algún wrapper del sticky, déjalo “permeable” */
+.sticky-wrap { 
+  pointer-events: none; 
+}
+.sticky-wrap .sticky-cta { 
+  pointer-events: auto; 
+}
 
