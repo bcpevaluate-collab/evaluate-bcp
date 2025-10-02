@@ -48,7 +48,7 @@ export default function Hero() {
 <div
   className="
     col-span-12 md:col-span-6
-    absolute right-4 top-[80px]    /* 📱 más arriba en móvil */
+    absolute right-4 top-[60px]    /* 📱 más arriba en móvil */
     md:static md:flex md:justify-end md:items-center md:mt-0
     z-10
   "
