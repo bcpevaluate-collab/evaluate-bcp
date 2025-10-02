@@ -182,4 +182,6 @@ body{ @apply antialiased text-[color:var(--ink)] bg-white; }
 .sticky-wrap .sticky-cta { 
   pointer-events: auto; 
 }
+/* Kill-switch temporal del sticky dentro de /prestamo */
+:root:has(main[data-route="prestamo"]) .sticky-cta { display: none !important; }
 
