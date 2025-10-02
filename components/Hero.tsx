@@ -11,10 +11,9 @@ export default function Hero() {
           "linear-gradient(180deg, #0C3A85 0%, #083177 48%, #0A3D8B 100%)",
       }}
     >
-      {/* ========== MOBILE (aislado, sin altura extra) ========== */}
+      {/* ========== MOBILE ========== */}
       <div className="block md:hidden relative">
-        {/* pb pequeño para respirar; la curva NO aporta altura */}
-        <div className="container-max relative z-10 pt-6 pb-2">
+        <div className="container-max relative z-10 pt-6 pb-0">
           <p className="text-[14px] font-[400] mb-1">Solicita tu</p>
           <h1 className="leading-[1.15] mb-1">
             <span className="block text-[28px] font-[600]">Préstamo</span>
@@ -22,25 +21,25 @@ export default function Hero() {
           </h1>
           <p className="text-[16px] font-[400] mt-1">y recíbelo al instante</p>
 
-          {/* Ilustración en la posición exacta */}
-          <div className="relative h-[110px] mt-2">
+          {/* Ilustración más arriba */}
+          <div className="relative h-[90px] mt-2">
             <Image
               src="/hero-illustration.svg"
               alt="Préstamo online"
               width={140}
               height={140}
               priority
-              className="pointer-events-none absolute top-[35px] right-3 w-[120px] h-auto"
+              className="pointer-events-none absolute top-[20px] right-3 w-[120px] h-auto"
             />
           </div>
         </div>
 
-        {/* Curva ABSOLUTA: no suma altura, elimina el “mar azul” extra */}
+        {/* Curva más corta */}
         <svg
           viewBox="0 0 1200 168"
           preserveAspectRatio="none"
           xmlns="http://www.w3.org/2000/svg"
-          className="pointer-events-none absolute bottom-0 left-0 w-full h-[140px]"
+          className="pointer-events-none absolute bottom-0 left-0 w-full h-[120px]"
           aria-hidden
         >
           <path
@@ -50,7 +49,7 @@ export default function Hero() {
         </svg>
       </div>
 
-      {/* ========== DESKTOP (no tocamos mobile aquí) ========== */}
+      {/* ========== DESKTOP ========== */}
       <div className="hidden md:block pb-16">
         <div className="container-max relative z-10 pt-14">
           <div className="grid grid-cols-12 items-center">
@@ -76,10 +75,8 @@ export default function Hero() {
             </div>
           </div>
 
-          {/* Formulario inline (desktop) */}
           <div className="mt-8">
             <InlineLoanForm variant="hero" />
-
             <div className="mt-4 rounded-[10px] bg-[#EAF2FF] text-[#0B3A8C] p-4 flex items-center gap-3">
               <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden>
                 <circle
