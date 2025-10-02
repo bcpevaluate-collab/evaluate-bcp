@@ -48,8 +48,8 @@ export default function Hero() {
 <div
   className="
     col-span-12 md:col-span-6
-    absolute right-4 top-[130px]    /* 📱 posición flotada en móvil */
-    md:static md:flex md:justify-end md:items-center md:mt-0 /* 💻 posición normal en desktop */
+    absolute right-4 top-[90px]    /* 📱 más arriba en móvil */
+    md:static md:flex md:justify-end md:items-center md:mt-0
     z-10
   "
 >
