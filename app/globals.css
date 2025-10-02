@@ -303,4 +303,49 @@ body{ @apply antialiased text-[color:var(--ink)] bg-white; }
 
 .keypad-bcp__icon{ display:block; }
 
+/* ====== Keypad BCP (clonado del DOM real) ====== */
+.keyboard-box{
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:18px;
+  box-shadow:0 16px 32px rgba(0,0,0,.15);
+  padding:12px;
+}
+.keyboard-container{ width:100%; }
+.keyboard-body{
+  display:grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap:8px;
+}
+
+/* tecla de dígito */
+.bcp-keyboard-key-host .digit-key{
+  height:56px;
+  border:1px solid var(--line);
+  border-radius:12px;
+  background:#fff;
+  display:flex; align-items:center; justify-content:center;
+  position:relative;
+}
+.bcp-keyboard-key-host .digit-key:hover{ background:#F5F7FB; cursor:pointer; }
+.pixel{
+  position:absolute; width:3px; height:3px; border-radius:999px;
+  background:#CAD2DE; opacity:.75;
+}
+
+/* texto del dígito (usa tu Flexo Demi) */
+.bcp-font-demi{ font-weight:600; }
+.onsurface-800{ color:#334155; }
+.title-sm{ font-size:17px; line-height:1; }
+
+/* teclas de icono (trash & backspace) */
+.icon-key{
+  height:56px;
+  border:1px solid var(--line);
+  border-radius:12px;
+  display:flex; align-items:center; justify-content:center;
+  color:#8AA0B6; background:#fff;
+}
+.icon-key:hover{ background:#F5F7FB; cursor:pointer; }
+
 
