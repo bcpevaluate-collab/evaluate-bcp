@@ -45,16 +45,23 @@ export default function Hero() {
           </div>
 
           {/* Columna derecha → ilustración */}
-          <div className="col-span-12 md:col-span-6 flex justify-center md:justify-end mt-6 md:mt-0">
-            <Image
-              src="/hero-illustration.svg"
-              alt="Préstamo online"
-              width={220}
-              height={220}
-              priority
-              className="w-[140px] h-auto md:w-[280px]"
-            />
-          </div>
+<div
+  className="
+    col-span-12 md:col-span-6
+    absolute right-4 top-[130px]    /* 📱 posición flotada en móvil */
+    md:static md:flex md:justify-end md:items-center md:mt-0 /* 💻 posición normal en desktop */
+    z-10
+  "
+>
+  <Image
+    src="/hero-illustration.svg"
+    alt="Préstamo online"
+    width={320}
+    height={320}
+    priority
+    className="w-[140px] h-auto md:w-[300px] md:h-auto"
+  />
+</div>
         </div>
       </div>
 
