@@ -48,20 +48,21 @@ export default function Hero() {
 <div
   className="
     col-span-12 md:col-span-6
-    absolute right-4 top-[30px]    /* 📱 más arriba en móvil */
-    md:static md:flex md:justify-end md:items-center md:mt-0
+    absolute right-4 top-[30px]    /* 📱 flotada en móvil */
+    md:static md:flex md:justify-end md:items-center md:mt-0 /* 💻 normal en desktop */
     z-10
   "
 >
   <Image
     src="/hero-illustration.svg"
     alt="Préstamo online"
-    width={320}
-    height={320}
+    width={380}
+    height={380}
     priority
-    className="w-[140px] h-auto md:w-[300px] md:h-auto"
+    className="w-[140px] h-auto md:w-[360px] md:h-auto"
   />
 </div>
+
         </div>
       </div>
 
