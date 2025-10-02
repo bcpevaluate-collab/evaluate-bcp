@@ -1,33 +1,20 @@
 "use client";
-import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { useState, useMemo } from "react";
+import Link from "next/link";
 
 export default function Prestamo() {
   const [amount, setAmount] = useState(7000);
   const [payDay, setPayDay] = useState("02");
   const [loading, setLoading] = useState(false);
-  const [ok, setOk] = useState<string | null>(null);
-  const router = useRouter();
 
-  const goToStep2 = async () => {
-    try {
-      setLoading(true);
-      setOk(null);
-
-      // Construimos la URL al Paso 2
-      const params = new URLSearchParams({
-        amount: String(amount ?? ""),
-        payDay: String(payDay ?? ""),
-      });
-
-      router.push(`/prestamo/validacion?${params.toString()}`);
-    } catch (err) {
-      console.error(err);
-      setOk("Ocurrió un problema. Inténtalo nuevamente.");
-    } finally {
-      setLoading(false);
-    }
-  };
+  // Armamos el href con query de manera memoizada
+  const hrefValidacion = useMemo(
+    () => ({
+      pathname: "/prestamo/validacion",
+      query: { amount: String(amount ?? ""), payDay: String(payDay ?? "") },
+    }),
+    [amount, payDay]
+  );
 
   return (
     <section className="bg-[#0B3A8C] py-10">
@@ -37,7 +24,6 @@ export default function Prestamo() {
             Elige tu monto y fecha de pago
           </h1>
 
-          {/* Quitamos dependencia del submit y usamos click directo */}
           <div className="mt-4 grid md:grid-cols-3 gap-4">
             <label className="block">
               <span className="text-sm font-medium">Monto</span>
@@ -65,17 +51,16 @@ export default function Prestamo() {
               </select>
             </label>
 
-            <button
-              type="button"
-              onClick={goToStep2}
-              className="btn-cta self-end"
-              disabled={loading}
+            {/* Enlace como botón: navegación garantizada */}
+            <Link
+              href={hrefValidacion}
+              prefetch={false}
+              className="btn-cta self-end text-center select-none"
+              onClick={() => setLoading(true)}
             >
               {loading ? "Procesando…" : "Empezar"}
-            </button>
+            </Link>
           </div>
-
-          {ok && <p className="mt-3 text-green-600">{ok}</p>}
         </div>
 
         <div className="container-max pb-6 text-white/80 text-sm mt-4">
