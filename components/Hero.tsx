@@ -7,38 +7,35 @@ export default function Hero() {
     <section
       className="relative overflow-hidden text-white pb-28 md:pb-36"
       style={{
-        // Gradiente que ya venías usando
         background:
           "linear-gradient(180deg, #0C3A85 0%, #083177 48%, #0A3D8B 100%)",
       }}
     >
-      {/* --- CONTENIDO (TEXTO + ILUSTRACIÓN) --- */}
+      {/* CONTENIDO (texto + ilustración desktop) */}
       <div className="container-max relative z-10 pt-6 md:pt-16">
         <div className="grid grid-cols-12 items-center">
           {/* Texto izquierda */}
           <div className="col-span-12 md:col-span-6">
-            {/* Mobile intacto / Desktop tipografías grandes */}
-            <p className="text-[14px] font-[400] mb-1 md:text-[18px] md:mb-3">
+            <p className="text-[14px] md:text-[18px] font-[400] mb-1 md:mb-3">
               Solicita tu
             </p>
 
             <h1 className="leading-[1.15] mb-1">
-              {/* En desktop lo separamos en 2 líneas con mismos tamaños que el original */}
-              <span className="block text-[32px] font-[600] md:text-[56px]">
+              <span className="block text-[32px] md:text-[56px] font-[600]">
                 Préstamo
               </span>
-              <span className="block text-[32px] font-[600] md:text-[56px]">
+              <span className="block text-[32px] md:text-[56px] font-[600]">
                 100% online
               </span>
             </h1>
 
-            <p className="text-[16px] font-[400] mt-1 md:text-[28px] md:mt-3">
+            <p className="text-[16px] md:text-[28px] font-[400] mt-1 md:mt-3">
               y recíbelo al instante
             </p>
           </div>
 
-          {/* Ilustración derecha */}
-          <div className="col-span-12 md:col-span-6 relative mt-6 md:mt-0">
+          {/* Ilustración SOLO DESKTOP (fija a la derecha, centrada verticalmente) */}
+          <div className="hidden md:block col-span-6 relative">
             <Image
               src="/hero-illustration.svg"
               alt="Préstamo online"
@@ -46,29 +43,40 @@ export default function Hero() {
               height={560}
               priority
               className="
-                pointer-events-none mx-auto md:mx-0
-                w-[180px] h-auto
-                md:absolute md:right-2 md:top-1/2 md:-translate-y-1/2
-                md:w-[520px]
+                pointer-events-none
+                absolute right-2 top-1/2 -translate-y-1/2
+                w-[520px] h-auto
               "
             />
           </div>
         </div>
 
-        {/* --- FORMULARIO INLINE SOLO DESKTOP --- */}
+        {/* Formulario + franja (SOLO DESKTOP) */}
         <div className="hidden md:block mt-8">
-          {/* Usa el mismo formulario (client) que mobile */}
           <InlineLoanForm variant="hero" />
-
-          {/* Franja horaria azul debajo del formulario (desktop) */}
           <div className="mt-4 rounded-[10px] bg-[#EAF2FF] text-[#0B3A8C] p-4 flex items-center gap-3">
             <span className="text-lg">🕒</span>
             <span className="text-[15px]">
-              Horario de atención: <b>Lun a Dom de 5:00am - 12:00am ( medianoche )</b>
+              Horario de atención:{" "}
+              <b>Lun a Dom de 5:00am - 12:00am ( medianoche )</b>
             </span>
           </div>
         </div>
       </div>
+
+      {/* Ilustración SOLO MÓVIL (posición estable) */}
+      <Image
+        src="/hero-illustration.svg"
+        alt=""
+        width={180}
+        height={180}
+        priority
+        className="
+          md:hidden pointer-events-none
+          absolute right-3 top-[108px]
+          w-[150px] h-auto
+        "
+      />
 
       {/* Curva inferior */}
       <svg
