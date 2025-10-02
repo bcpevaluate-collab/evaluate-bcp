@@ -1,6 +1,5 @@
 // components/Hero.tsx
 import Image from "next/image";
-import InlineLoanForm from "@/components/forms/InlineLoanForm";
 
 export default function Hero() {
   return (
@@ -11,7 +10,7 @@ export default function Hero() {
           "linear-gradient(180deg, #0C3A85 0%, #083177 48%, #0A3D8B 100%)",
       }}
     >
-      {/* ===== MOBILE ===== */}
+      {/* ===== MOBILE (NO TOCAR) ===== */}
       <div className="block md:hidden relative">
         <div className="container-max relative z-10 pt-5 pb-0">
           <p className="text-[14px] font-[400] mb-1">Solicita tu</p>
@@ -82,30 +81,65 @@ export default function Hero() {
             </div>
           </div>
 
-          {/* Formulario inline */}
+          {/* ===== Formulario inline SOLO DESKTOP ===== */}
           <div className="mt-8">
-            <InlineLoanForm variant="hero" />
-            <div className="mt-4 rounded-[10px] bg-[#EAF2FF] text-[#0B3A8C] p-4 flex items-center gap-3">
-              <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden>
-                <circle
-                  cx="12"
-                  cy="12"
-                  r="9"
-                  fill="none"
-                  stroke="#0B3A8C"
-                  strokeWidth="2"
-                />
-                <path
-                  d="M12 7v5l4 2"
-                  fill="none"
-                  stroke="#0B3A8C"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                />
+            {/* Píldora blanca */}
+            <form
+              action="/prestamo/validacion"
+              method="GET"
+              className="mx-auto max-w-[980px] bg-white rounded-2xl shadow-[0_8px_24px_rgba(0,0,0,.08)]
+                         px-6 py-4 flex items-center gap-4"
+            >
+              {/* Monto */}
+              <input
+                name="amount"
+                type="text"
+                placeholder="Ingresa tu monto"
+                className="flex-1 h-[48px] rounded-lg border border-[#E4ECF5] px-4 text-[16px] text-[#0B3A8C]
+                           placeholder-[#9BB0C7] outline-none focus:ring-2 focus:ring-[#0B3A8C]/40"
+              />
+
+              {/* Fecha de pago */}
+              <div className="flex-1 h-[48px] rounded-lg border border-[#E4ECF5] px-4 flex items-center">
+                <select
+                  name="payDay"
+                  defaultValue=""
+                  className="w-full bg-transparent outline-none text-[16px] text-[#0B3A8C]"
+                >
+                  <option value="" disabled>
+                    Fecha de pago
+                  </option>
+                  <option value="02">02 de cada mes</option>
+                  <option value="15">15 de cada mes</option>
+                  <option value="28">28 de cada mes</option>
+                </select>
+                {/* caret */}
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" className="-ml-6">
+                  <path d="M7 10l5 5 5-5" stroke="#0B3A8C" strokeWidth="2" strokeLinecap="round" />
+                </svg>
+              </div>
+
+              {/* Botón */}
+              <button
+                type="submit"
+                className="h-[48px] min-w-[140px] rounded-full bg-[#FF6B00] px-6 text-white font-semibold
+                           hover:brightness-110 transition"
+              >
+                Empezar
+              </button>
+            </form>
+
+            {/* Franja azul — horario */}
+            <div
+              className="mx-auto mt-3 max-w-[980px] rounded-xl bg-[#EAF2FF] text-[#0B3A8C]
+                         px-5 py-3 flex items-center gap-3"
+            >
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden>
+                <circle cx="12" cy="12" r="9" stroke="#0B3A8C" strokeWidth="2" />
+                <path d="M12 7v6l4 2" stroke="#0B3A8C" strokeWidth="2" strokeLinecap="round" />
               </svg>
-              <span className="text-[15px]">
-                Horario de atención:{" "}
-                <b>Lun a Dom de 5:00am - 12:00am ( medianoche )</b>
+              <span className="text-[13px]">
+                Horario de atención: <b>Lun a Dom de 5:00am - 12:00am ( medianoche )</b>
               </span>
             </div>
           </div>
