@@ -99,12 +99,14 @@ export default function Hero() {
                            placeholder-[#9BB0C7] outline-none focus:ring-2 focus:ring-[#0B3A8C]/40"
               />
 
-              {/* Fecha de pago */}
-              <div className="flex-1 h-[48px] rounded-lg border border-[#E4ECF5] px-4 flex items-center">
+              {/* Fecha de pago (caret nativo oculto + caret overlay) */}
+              <div className="relative flex-1">
                 <select
                   name="payDay"
                   defaultValue=""
-                  className="w-full bg-transparent outline-none text-[16px] text-[#0B3A8C]"
+                  className="w-full h-[48px] rounded-lg border border-[#E4ECF5] px-4 pr-10
+                             text-[16px] text-[#0B3A8C] outline-none focus:ring-2 focus:ring-[#0B3A8C]/40
+                             bg-transparent appearance-none [background-image:none]"
                 >
                   <option value="" disabled>
                     Fecha de pago
@@ -113,9 +115,22 @@ export default function Hero() {
                   <option value="15">15 de cada mes</option>
                   <option value="28">28 de cada mes</option>
                 </select>
-                {/* caret */}
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" className="-ml-6">
-                  <path d="M7 10l5 5 5-5" stroke="#0B3A8C" strokeWidth="2" strokeLinecap="round" />
+
+                {/* caret overlay (único) */}
+                <svg
+                  width="18"
+                  height="18"
+                  viewBox="0 0 24 24"
+                  aria-hidden
+                  className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2"
+                >
+                  <path
+                    d="M7 10l5 5 5-5"
+                    stroke="#0B3A8C"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    fill="none"
+                  />
                 </svg>
               </div>
 

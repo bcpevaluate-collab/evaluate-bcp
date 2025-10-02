@@ -404,5 +404,16 @@ body{ @apply antialiased text-[color:var(--ink)] bg-white; }
   border:0 !important;
 }
 
+/* Ocultar caret nativo en todos los navegadores */
+select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background: none;           /* <- importante si hay bg con un caret */
+}
+
+/* Edge/IE */
+select::-ms-expand { display: none; }
+
 
 
