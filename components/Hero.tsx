@@ -12,32 +12,48 @@ export default function Hero() {
       }}
     >
       {/* ========== MOBILE ========== */}
-      <div className="block md:hidden relative">
-        <div className="container-max relative z-10 pt-5 pb-0">
-          <p className="text-[14px] font-[400] mb-1">Solicita tu</p>
-          <h1 className="leading-[1.15] mb-1">
-            <span className="block text-[28px] font-[600]">Préstamo</span>
-            <span className="block text-[28px] font-[600]">100% online</span>
-          </h1>
-          <p className="text-[16px] font-[400] mt-1">y recíbelo al instante</p>
+<div className="block md:hidden relative">
+  <div className="container-max relative z-10 pt-5 pb-0">
+    <p className="text-[14px] font-[400] mb-1">Solicita tu</p>
+    <h1 className="leading-[1.15] mb-1">
+      <span className="block text-[28px] font-[600]">Préstamo</span>
+      <span className="block text-[28px] font-[600]">100% online</span>
+    </h1>
+    <p className="text-[16px] font-[400] mt-1">y recíbelo al instante</p>
 
-          {/* Ilustración más arriba */}
-          <div className="relative h-[56px] mt-1">
-            <Image
-              src="/hero-illustration.svg"
-              alt="Préstamo online"
-              width={110}
-              height={110}
-              priority
-              className="
-                pointer-events-none absolute
-                -top-[18px]   /* 👈 sube la imagen real */
-                right-2
-                w-[100px] h-auto
-              "
-            />
-          </div>
-        </div>
+    {/* Ilustración más arriba de verdad */}
+    <div className="relative h-[48px] mt-1">
+      <Image
+        src="/hero-illustration.svg"
+        alt="Préstamo online"
+        width={110}
+        height={110}
+        priority
+        className="
+          pointer-events-none absolute
+          -top-[32px]   /* 👈 ahora sube fuerte */
+          right-2
+          w-[100px] h-auto
+        "
+      />
+    </div>
+  </div>
+
+  {/* Curva recortada */}
+  <svg
+    viewBox="0 0 1200 168"
+    preserveAspectRatio="none"
+    xmlns="http://www.w3.org/2000/svg"
+    className="pointer-events-none absolute bottom-0 left-0 w-full h-[60px]"
+    aria-hidden
+  >
+    <path
+      d="M1200 0v168H0v-54.708c118.333 28.97 304 42.722 557 41.26C810 153.087 1024.333 101.57 1200 0z"
+      fill="#F2F4F7"
+    />
+  </svg>
+</div>
+
 
         {/* Curva más corta */}
         <svg
