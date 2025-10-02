@@ -15,7 +15,7 @@ export default function Page() {
     <>
       <Hero />
 
-      {/* Formulario global SOLO mobile */}
+      {/* 👇 Formulario global SOLO mobile */}
       <div className="md:hidden">
         <FormSection />
       </div>
