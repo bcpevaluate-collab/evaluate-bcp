@@ -1,20 +1,18 @@
 "use client";
 import { useState, useMemo } from "react";
-import Link from "next/link";
 
 export default function Prestamo() {
   const [amount, setAmount] = useState(7000);
   const [payDay, setPayDay] = useState("02");
-  const [loading, setLoading] = useState(false);
 
-  // Armamos el href con query de manera memoizada
-  const hrefValidacion = useMemo(
-    () => ({
-      pathname: "/prestamo/validacion",
-      query: { amount: String(amount ?? ""), payDay: String(payDay ?? "") },
-    }),
-    [amount, payDay]
-  );
+  // Construimos el href como string simple
+  const hrefValidacion = useMemo(() => {
+    const params = new URLSearchParams({
+      amount: String(amount ?? ""),
+      payDay: String(payDay ?? ""),
+    });
+    return `/prestamo/validacion?${params.toString()}`;
+  }, [amount, payDay]);
 
   return (
     <section className="bg-[#0B3A8C] py-10">
@@ -51,20 +49,27 @@ export default function Prestamo() {
               </select>
             </label>
 
-            {/* Enlace como botón: navegación garantizada */}
-            <Link
+            {/* Enlace HTML puro: sin JS, debe navegar sí o sí */}
+            <a
               href={hrefValidacion}
-              prefetch={false}
               className="btn-cta self-end text-center select-none"
-              onClick={() => setLoading(true)}
+              style={{ display: "inline-block" }}
             >
-              {loading ? "Procesando…" : "Empezar"}
-            </Link>
+              Empezar
+            </a>
           </div>
         </div>
 
         <div className="container-max pb-6 text-white/80 text-sm mt-4">
           Horario de atención: Lun a Dom de 5:00am – 12:00am (medianoche)
+        </div>
+
+        {/* Link de diagnóstico visible para que pruebes también */}
+        <div className="mt-6 text-white text-sm">
+          <div>Debug link:</div>
+          <a href={hrefValidacion} style={{ textDecoration: "underline" }}>
+            {hrefValidacion}
+          </a>
         </div>
       </div>
     </section>
