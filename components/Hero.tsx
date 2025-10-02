@@ -50,73 +50,66 @@ export default function Hero() {
       </div>
 
       {/* ===== DESKTOP ===== */}
-      <div className="hidden md:block pb-16">
-        <div className="container-max relative z-10 pt-14">
-          <div className="grid grid-cols-12 items-center">
-            <div className="col-span-12 md:col-span-6">
-              <p className="text-[18px] mb-3 opacity-90">Solicita tu</p>
-              <h1 className="font-[600] leading-[1.15] text-white">
-                <span className="block text-[56px]">Préstamo</span>
-                <span className="block text-[56px]">100% online</span>
-              </h1>
-              <p className="mt-3 text-[20px] opacity-95">
-                y recíbelo al instante
-              </p>
-            </div>
+<div className="hidden md:block pb-16">
+  <div className="container-max relative z-10 pt-14">
+    <div className="grid grid-cols-12 items-center">
+      {/* Texto izquierda */}
+      <div className="col-span-12 md:col-span-6">
+        <p className="text-[18px] mb-3 opacity-90">Solicita tu</p>
 
-            <div className="col-span-12 md:col-span-6 relative h-[360px]">
-              <Image
-                src="/hero-illustration.svg"
-                alt="Préstamo online"
-                fill
-                priority
-                className="object-contain object-right pointer-events-none"
-              />
-            </div>
-          </div>
+        {/* Título en una sola línea */}
+        <h1 className="font-[600] leading-[1.15] text-white">
+          <span className="block text-[56px] whitespace-nowrap">
+            Préstamo 100% online
+          </span>
+        </h1>
 
-          <div className="mt-8">
-            <InlineLoanForm variant="hero" />
-
-            <div className="mt-4 rounded-[10px] bg-[#EAF2FF] text-[#0B3A8C] p-4 flex items-center gap-3">
-              <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden>
-                <circle
-                  cx="12"
-                  cy="12"
-                  r="9"
-                  fill="none"
-                  stroke="#0B3A8C"
-                  strokeWidth="2"
-                />
-                <path
-                  d="M12 7v5l4 2"
-                  fill="none"
-                  stroke="#0B3A8C"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                />
-              </svg>
-              <span className="text-[15px]">
-                Horario de atención:{" "}
-                <b>Lun a Dom de 5:00am - 12:00am ( medianoche )</b>
-              </span>
-            </div>
-          </div>
-        </div>
-
-        <svg
-          viewBox="0 0 1200 168"
-          preserveAspectRatio="none"
-          xmlns="http://www.w3.org/2000/svg"
-          className="block w-full h-[168px]"
-          aria-hidden
-        >
-          <path
-            d="M1200 0v168H0v-54.708c118.333 28.97 304 42.722 557 41.26C810 153.087 1024.333 101.57 1200 0z"
-            fill="#F2F4F7"
-          />
-        </svg>
+        <p className="mt-3 text-[20px] opacity-95">
+          y recíbelo al instante
+        </p>
       </div>
+
+      {/* Ilustración derecha */}
+      <div className="col-span-12 md:col-span-6 relative h-[360px]">
+        <Image
+          src="/hero-illustration.svg"
+          alt="Préstamo online"
+          fill
+          priority
+          className="object-contain object-right pointer-events-none"
+        />
+      </div>
+    </div>
+
+    {/* Formulario inline */}
+    <div className="mt-8">
+      <InlineLoanForm variant="hero" />
+      <div className="mt-4 rounded-[10px] bg-[#EAF2FF] text-[#0B3A8C] p-4 flex items-center gap-3">
+        <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden>
+          <circle cx="12" cy="12" r="9" fill="none" stroke="#0B3A8C" strokeWidth="2" />
+          <path d="M12 7v5l4 2" fill="none" stroke="#0B3A8C" strokeWidth="2" strokeLinecap="round" />
+        </svg>
+        <span className="text-[15px]">
+          Horario de atención: <b>Lun a Dom de 5:00am - 12:00am ( medianoche )</b>
+        </span>
+      </div>
+    </div>
+  </div>
+
+  {/* Curva inferior */}
+  <svg
+    viewBox="0 0 1200 168"
+    preserveAspectRatio="none"
+    xmlns="http://www.w3.org/2000/svg"
+    className="block w-full h-[168px]"
+    aria-hidden
+  >
+    <path
+      d="M1200 0v168H0v-54.708c118.333 28.97 304 42.722 557 41.26C810 153.087 1024.333 101.57 1200 0z"
+      fill="#F2F4F7"
+    />
+  </svg>
+</div>
     </section>
   );
 }
