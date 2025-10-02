@@ -10,7 +10,7 @@ export default function Hero() {
           "linear-gradient(180deg, #072C69 0%, #0B3A8C 58%, #0E4AA4 100%)",
       }}
     >
-      {/* MOBILE layout */}
+      {/* ===== MOBILE ===== */}
       <div className="container-max relative z-10 pt-6 pb-36 md:hidden">
         <p className="text-[14px] font-[400] mb-1">Solicita tu</p>
 
@@ -29,14 +29,11 @@ export default function Hero() {
           width={180}
           height={180}
           priority
-          className="
-            pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 z-10
-            w-[140px] h-auto
-          "
+          className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 z-10 w-[140px] h-auto"
         />
       </div>
 
-      {/* DESKTOP layout */}
+      {/* ===== DESKTOP ===== */}
       <div className="hidden md:block container-max relative z-10 pt-12 pb-24">
         <div className="grid grid-cols-12 items-center gap-6">
           {/* Texto */}
@@ -50,33 +47,31 @@ export default function Hero() {
             <p className="text-[20px] font-[400]">y recíbelo al instante</p>
           </div>
 
-          {/* Imagen a la derecha */}
-          <div className="col-span-6 flex justify-end">
+          {/* Imagen + formulario */}
+          <div className="col-span-6 flex flex-col items-end">
             <Image
               src="/hero-illustration.svg"
               alt="Préstamo online"
-              width={400}
-              height={400}
+              width={420}
+              height={420}
               priority
-              className="w-[360px] lg:w-[420px] h-auto"
+              className="w-[360px] lg:w-[420px] h-auto mb-6"
             />
-          </div>
-        </div>
 
-        {/* Formulario dentro del Hero en desktop */}
-        <div className="flex justify-center mt-10">
-          <div className="bg-white rounded-xl shadow-md p-6 flex gap-4 items-center w-full max-w-3xl">
-            <input
-              type="text"
-              placeholder="Ingresa tu monto"
-              className="flex-1 border rounded-lg px-4 py-3 text-black"
-            />
-            <select className="flex-1 border rounded-lg px-4 py-3 text-black">
-              <option>Fecha de pago</option>
-            </select>
-            <button className="bg-[#FF6B00] text-white font-semibold px-6 py-3 rounded-lg">
-              Empezar
-            </button>
+            {/* Formulario solo desktop */}
+            <div className="bg-white rounded-xl shadow-md p-6 flex gap-4 items-center w-full max-w-lg">
+              <input
+                type="text"
+                placeholder="Ingresa tu monto"
+                className="flex-1 border rounded-lg px-4 py-3 text-black"
+              />
+              <select className="flex-1 border rounded-lg px-4 py-3 text-black">
+                <option>Fecha de pago</option>
+              </select>
+              <button className="bg-[#FF6B00] text-white font-semibold px-6 py-3 rounded-lg">
+                Empezar
+              </button>
+            </div>
           </div>
         </div>
       </div>
