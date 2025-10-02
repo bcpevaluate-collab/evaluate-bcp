@@ -7,14 +7,19 @@ import FormSection from "@/components/FormSection";
 const StepsSlider = dynamic(() => import("@/components/StepsSlider"), { ssr: false });
 const FAQ = dynamic(() => import("@/components/FAQ"), { ssr: false });
 const CTABox = dynamic(() => import("@/components/CTABox"), { ssr: false });
-const LegalNote = dynamic(() => import("@/components/LegalNote"), { ssr: false }); // 👈 nuevo
+const LegalNote = dynamic(() => import("@/components/LegalNote"), { ssr: false });
 const CTASticky = dynamic(() => import("@/components/CTASticky"), { ssr: false });
 
 export default function Page() {
   return (
     <>
       <Hero />
-      <FormSection />
+
+      {/* Formulario global SOLO mobile */}
+      <div className="md:hidden">
+        <FormSection />
+      </div>
+
       <Benefits />
       <StepsSlider />
 
