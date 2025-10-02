@@ -73,7 +73,7 @@ export default function Hero() {
         priority
         className="
           md:hidden pointer-events-none
-          absolute right-3 top-[108px]
+          absolute right-3 top-[80px]
           w-[150px] h-auto
         "
       />
