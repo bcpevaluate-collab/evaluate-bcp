@@ -13,7 +13,7 @@ export default function Hero() {
     >
       {/* ========== MOBILE ========== */}
       <div className="block md:hidden relative">
-        <div className="container-max relative z-10 pt-6 pb-0">
+        <div className="container-max relative z-10 pt-5 pb-0">
           <p className="text-[14px] font-[400] mb-1">Solicita tu</p>
           <h1 className="leading-[1.15] mb-1">
             <span className="block text-[28px] font-[600]">Préstamo</span>
@@ -21,25 +21,25 @@ export default function Hero() {
           </h1>
           <p className="text-[16px] font-[400] mt-1">y recíbelo al instante</p>
 
-          {/* Ilustración más arriba */}
-          <div className="relative h-[90px] mt-2">
+          {/* Ilustración: más arriba y menos alto azul */}
+          <div className="relative h-[72px] mt-1">
             <Image
               src="/hero-illustration.svg"
               alt="Préstamo online"
-              width={140}
-              height={140}
+              width={120}
+              height={120}
               priority
-              className="pointer-events-none absolute top-[20px] right-3 w-[120px] h-auto"
+              className="pointer-events-none absolute top-[10px] right-2 w-[112px] h-auto"
             />
           </div>
         </div>
 
-        {/* Curva más corta */}
+        {/* Curva MUY corta para que el azul no se alargue */}
         <svg
           viewBox="0 0 1200 168"
           preserveAspectRatio="none"
           xmlns="http://www.w3.org/2000/svg"
-          className="pointer-events-none absolute bottom-0 left-0 w-full h-[120px]"
+          className="pointer-events-none absolute bottom-0 left-0 w-full h-[96px]"
           aria-hidden
         >
           <path
@@ -59,9 +59,7 @@ export default function Hero() {
                 <span className="block text-[56px]">Préstamo</span>
                 <span className="block text-[56px]">100% online</span>
               </h1>
-              <p className="mt-3 text-[20px] opacity-95">
-                y recíbelo al instante
-              </p>
+              <p className="mt-3 text-[20px] opacity-95">y recíbelo al instante</p>
             </div>
 
             <div className="col-span-12 md:col-span-6 relative h-[360px]">
@@ -77,27 +75,14 @@ export default function Hero() {
 
           <div className="mt-8">
             <InlineLoanForm variant="hero" />
+
             <div className="mt-4 rounded-[10px] bg-[#EAF2FF] text-[#0B3A8C] p-4 flex items-center gap-3">
               <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden>
-                <circle
-                  cx="12"
-                  cy="12"
-                  r="9"
-                  fill="none"
-                  stroke="#0B3A8C"
-                  strokeWidth="2"
-                />
-                <path
-                  d="M12 7v5l4 2"
-                  fill="none"
-                  stroke="#0B3A8C"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                />
+                <circle cx="12" cy="12" r="9" fill="none" stroke="#0B3A8C" strokeWidth="2" />
+                <path d="M12 7v5l4 2" fill="none" stroke="#0B3A8C" strokeWidth="2" strokeLinecap="round" />
               </svg>
               <span className="text-[15px]">
-                Horario de atención:{" "}
-                <b>Lun a Dom de 5:00am - 12:00am ( medianoche )</b>
+                Horario de atención: <b>Lun a Dom de 5:00am - 12:00am ( medianoche )</b>
               </span>
             </div>
           </div>
