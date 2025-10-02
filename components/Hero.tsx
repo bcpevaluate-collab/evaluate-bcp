@@ -10,7 +10,6 @@ export default function Hero() {
           "linear-gradient(180deg, #072C69 0%, #0B3A8C 58%, #0E4AA4 100%)",
       }}
     >
-      {/* Contenido texto + formulario desktop */}
       <div className="container-max relative z-10 pt-6 md:pt-8">
         <div className="grid grid-cols-12 items-center">
           {/* Columna izquierda */}
@@ -46,14 +45,14 @@ export default function Hero() {
           </div>
 
           {/* Columna derecha → ilustración */}
-          <div className="hidden md:block col-span-6">
+          <div className="col-span-12 md:col-span-6 flex justify-center md:justify-end mt-6 md:mt-0">
             <Image
               src="/hero-illustration.svg"
               alt="Préstamo online"
-              width={320}
-              height={320}
+              width={220}
+              height={220}
               priority
-              className="ml-auto"
+              className="w-[140px] h-auto md:w-[280px]"
             />
           </div>
         </div>
