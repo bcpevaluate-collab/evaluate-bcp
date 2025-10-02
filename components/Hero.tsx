@@ -4,42 +4,58 @@ import Image from "next/image";
 export default function Hero() {
   return (
     <section
-      className="relative overflow-hidden text-white pb-36"
+      className="relative overflow-hidden text-white"
       style={{
-        background:
-          "linear-gradient(180deg, #072C69 0%, #0B3A8C 58%, #0E4AA4 100%)",
+        background: "linear-gradient(180deg, #072C69 0%, #0B3A8C 58%, #0E4AA4 100%)",
       }}
     >
-      <div className="container-max relative z-10 pt-6 md:pt-12">
-        <div className="relative">
-          {/* Texto siempre igual (mobile perfecto) */}
-          <p className="text-[14px] md:text-[16px] font-[400] mb-1">
-            Solicita tu
-          </p>
+      <div className="container-max relative z-10 pt-6 md:pt-12 pb-32 md:pb-20">
+        <div className="grid grid-cols-12 items-center">
+          {/* Texto */}
+          <div className="col-span-12 md:col-span-6">
+            <p className="text-[14px] md:text-[16px] font-[400] mb-1">
+              Solicita tu
+            </p>
 
-          <h1 className="text-[32px] md:text-[44px] font-[600] leading-[1.25] mb-2 max-w-[22rem] md:max-w-none">
-            <span>Préstamo</span>
-            <br />
-            <span>100% online</span>
-          </h1>
+            <h1 className="text-[32px] md:text-[44px] font-[600] leading-[1.25] mb-2 md:mb-4 max-w-[22rem] md:max-w-lg">
+              <span>Préstamo</span>
+              <br />
+              <span>100% online</span>
+            </h1>
 
-          <p className="text-[16px] md:text-[20px] font-[400] mt-1">
-            y recíbelo al instante
-          </p>
+            <p className="text-[16px] md:text-[20px] font-[400] mt-1">
+              y recíbelo al instante
+            </p>
+          </div>
 
-          {/* Imagen flotante en mobile, alineada a la derecha en desktop */}
-          <Image
-            src="/hero-illustration.svg"
-            alt="Préstamo online"
-            width={180}
-            height={180}
-            priority
-            className="
-              pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 z-10
-              w-[140px] h-auto
-              md:static md:inline-block md:w-[320px] md:translate-y-0 md:ml-auto
-            "
-          />
+          {/* Imagen */}
+          <div className="col-span-12 md:col-span-6 flex justify-center md:justify-end mt-6 md:mt-0">
+            <Image
+              src="/hero-illustration.svg"
+              alt="Préstamo online"
+              width={180}
+              height={180}
+              priority
+              className="w-[140px] h-auto md:w-[360px] lg:w-[400px]"
+            />
+          </div>
+        </div>
+
+        {/* Formulario en desktop dentro del hero */}
+        <div className="hidden md:flex justify-center mt-10">
+          <div className="bg-white rounded-xl shadow-md p-6 flex gap-4 items-center w-full max-w-3xl">
+            <input
+              type="text"
+              placeholder="Ingresa tu monto"
+              className="flex-1 border rounded-lg px-4 py-3 text-black"
+            />
+            <select className="flex-1 border rounded-lg px-4 py-3 text-black">
+              <option>Fecha de pago</option>
+            </select>
+            <button className="bg-[#FF6B00] text-white font-semibold px-6 py-3 rounded-lg">
+              Empezar
+            </button>
+          </div>
         </div>
       </div>
 
