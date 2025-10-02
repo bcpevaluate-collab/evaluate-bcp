@@ -100,44 +100,44 @@ export default function InlineLoanForm({
           </div>
 
           {/* Fecha de pago (select) */}
-          <div className="w-[320px] relative" ref={menuRef}>
-            <button
-              type="button"
-              onClick={() => setOpen((v) => !v)}
-              aria-expanded={open}
-              className={`${selectBtnBase}`}
-            >
-              <span className={`${payDay ? "text-[#0E1B2A]" : "text-[#8AA0B6]"}`}>
-                {payDay ? payDay.label : "Fecha de pago"}
-              </span>
-              {/* caret */}
-              <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden>
-                <path d="M7 10l5 5 5-5" stroke="#0B3A8C" strokeWidth="2" fill="none" />
-              </svg>
-            </button>
+<div className="w-[320px] relative" ref={menuRef}>
+  <button
+    type="button"
+    onClick={() => setOpen((v) => !v)}
+    aria-expanded={open}
+    className={`${selectBtnBase} appearance-none`} // 👈 aquí agregamos appearance-none
+  >
+    <span className={`${payDay ? "text-[#0E1B2A]" : "text-[#8AA0B6]"}`}>
+      {payDay ? payDay.label : "Fecha de pago"}
+    </span>
+    {/* 👇 solo se verá esta flecha */}
+    <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden>
+      <path d="M7 10l5 5 5-5" stroke="#0B3A8C" strokeWidth="2" fill="none" />
+    </svg>
+  </button>
 
-            {open && (
-              <div
-                className="absolute left-0 right-0 mt-2 rounded-[14px] border border-[#E6EEF8] bg-white
-                           shadow-[0_12px_24px_rgba(0,0,0,.12)] overflow-hidden z-20"
-              >
-                {DAY_OPTIONS.map((opt) => (
-                  <button
-                    key={opt.value}
-                    type="button"
-                    className="w-full text-left px-5 py-4 hover:bg-[#F5F7FB] text-[#0E1B2A] text-[16px]"
-                    onClick={() => {
-                      setPayDay(opt);
-                      setDayError("");
-                      setOpen(false);
-                    }}
-                  >
-                    {opt.label}
-                  </button>
-                ))}
-              </div>
-            )}
-          </div>
+  {open && (
+    <div
+      className="absolute left-0 right-0 mt-2 rounded-[14px] border border-[#E6EEF8] bg-white
+                 shadow-[0_12px_24px_rgba(0,0,0,.12)] overflow-hidden z-20"
+    >
+      {DAY_OPTIONS.map((opt) => (
+        <button
+          key={opt.value}
+          type="button"
+          className="w-full text-left px-5 py-4 hover:bg-[#F5F7FB] text-[#0E1B2A] text-[16px]"
+          onClick={() => {
+            setPayDay(opt);
+            setDayError("");
+            setOpen(false);
+          }}
+        >
+          {opt.label}
+        </button>
+      ))}
+    </div>
+  )}
+</div>
 
           {/* Botón */}
           <button
