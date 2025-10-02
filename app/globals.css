@@ -257,3 +257,20 @@ body{ @apply antialiased text-[color:var(--ink)] bg-white; }
   user-select: none;
 }
 
+/* ===== Label chip sobre el borde del input (estilo BCP) ===== */
+.field-bcp {
+  position: relative;
+}
+.field-bcp__label {
+  position: absolute;
+  top: -10px;
+  left: 14px;
+  padding: 0 6px;
+  font-size: 13px;
+  line-height: 1;
+  color: #6B7A90;
+  background: #fff; /* para “tapar” el borde por detrás */
+  z-index: 1;
+}
+
+
