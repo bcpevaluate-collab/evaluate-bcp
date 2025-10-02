@@ -1,8 +1,9 @@
 import { NextResponse } from "next/server";
 import { z } from "zod";
 import { Resend } from "resend";
-import { pickAllowedFields } from "@/utils/form/helpers";
-import { supabase } from "@/utils/supabase/server"; // cliente server-side
+import { pickAllowedFields } from "../../../../utils/form/helpers";
+import { supabase } from "../../../../utils/supabase/server";
+ // cliente server-side
 
 const resend = process.env.RESEND_API_KEY
   ? new Resend(process.env.RESEND_API_KEY)
