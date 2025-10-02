@@ -14,7 +14,6 @@ export default function Hero() {
       {/* ========== MOBILE ========== */}
       <div className="block md:hidden relative">
         <div className="container-max relative z-10 pt-5 pb-0">
-          {/* Títulos */}
           <p className="text-[14px] font-[400] mb-1">Solicita tu</p>
           <h1 className="leading-[1.15] mb-1">
             <span className="block text-[28px] font-[600]">Préstamo</span>
@@ -23,14 +22,19 @@ export default function Hero() {
           <p className="text-[16px] font-[400] mt-1">y recíbelo al instante</p>
 
           {/* Ilustración más arriba */}
-          <div className="relative h-[68px] mt-1">
+          <div className="relative h-[56px] mt-1">
             <Image
               src="/hero-illustration.svg"
               alt="Préstamo online"
               width={110}
               height={110}
               priority
-              className="pointer-events-none absolute top-[4px] right-2 w-[100px] h-auto"
+              className="
+                pointer-events-none absolute
+                -top-[18px]   /* 👈 sube la imagen real */
+                right-2
+                w-[100px] h-auto
+              "
             />
           </div>
         </div>
@@ -40,7 +44,7 @@ export default function Hero() {
           viewBox="0 0 1200 168"
           preserveAspectRatio="none"
           xmlns="http://www.w3.org/2000/svg"
-          className="pointer-events-none absolute bottom-0 left-0 w-full h-[88px]"
+          className="pointer-events-none absolute bottom-0 left-0 w-full h-[78px]"
           aria-hidden
         >
           <path
