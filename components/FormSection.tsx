@@ -1,6 +1,7 @@
 // components/FormSection.tsx
 "use client";
 import { useEffect, useRef, useState } from "react";
+import { useRouter } from "next/navigation"; // 👈 añade router
 
 type DayOption = { value: string; label: string };
 const DAY_OPTIONS: DayOption[] = [
@@ -10,6 +11,7 @@ const DAY_OPTIONS: DayOption[] = [
 ];
 
 export default function FormSection() {
+  const router = useRouter(); // 👈
   const [amount, setAmount] = useState("");
   const [payDay, setPayDay] = useState<DayOption | null>(null);
   const [open, setOpen] = useState(false);
@@ -40,10 +42,22 @@ export default function FormSection() {
     return ok;
   };
 
-  const submit = async (e: React.FormEvent) => {
+  const submit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!validate()) return;
-    await new Promise(r => setTimeout(r, 400));
+
+    // 👉 navega al PASO 2 con query params
+    const n = String(Number(amount));              // normaliza
+    const day = payDay?.value ?? "";
+    const qs = new URLSearchParams({ amount: n, payDay: day }).toString();
+    const url = `/prestamo/validacion?${qs}`;
+
+    // preferimos router; si algo bloquea, forzamos con location
+    try {
+      router.push(url);
+    } catch {
+      window.location.assign(url);
+    }
   };
 
   return (
@@ -53,7 +67,7 @@ export default function FormSection() {
       <div className="container-max -mt-12 md:-mt-16 pb-6">
         <div className="card-frm mx-auto max-w-[640px] px-5 md:px-6 py-5 md:py-6">
           <form onSubmit={submit} className="stack-20">
-            {/* Monto (solo placeholder) */}
+            {/* Monto */}
             <div>
               <input
                 className={`input-bcp w-full ${amountError ? "error" : ""}`}
@@ -102,22 +116,19 @@ export default function FormSection() {
               {dayError && <p className="mt-2 text-[#DD1831] text-[14px]">{dayError}</p>}
             </div>
 
-            {/* Botón grande (idéntico) */}
-            <button className="btn-bcp">Empezar</button>
+            {/* Botón grande (submit) */}
+            <button type="submit" className="btn-bcp">Empezar</button>
           </form>
         </div>
 
-        {/* Badge Horario de atención (con reloj y tipografías) */}
+        {/* Badge Horario de atención */}
         <div className="mt-4 badge-hours flex items-start gap-3 max-w-[640px]">
-          {/* Ícono reloj 20px, color primary-700 */}
           <svg width="20" height="20" viewBox="0 0 24 24" className="shrink-0" aria-hidden>
             <circle cx="12" cy="12" r="9" fill="none" stroke="var(--brand-700)" strokeWidth="2"/>
             <path d="M12 7v5l4 2" fill="none" stroke="var(--brand-700)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
           </svg>
-
           <p>
-            Horario de atención:{" "}
-            <b>Lun a Dom de 5:00am - 12:00am ( medianoche )</b>
+            Horario de atención: <b>Lun a Dom de 5:00am - 12:00am ( medianoche )</b>
           </p>
         </div>
       </div>
