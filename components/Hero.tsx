@@ -6,43 +6,65 @@ export default function Hero() {
     <section
       className="relative overflow-hidden text-white"
       style={{
-        background: "linear-gradient(180deg, #072C69 0%, #0B3A8C 58%, #0E4AA4 100%)",
+        background:
+          "linear-gradient(180deg, #072C69 0%, #0B3A8C 58%, #0E4AA4 100%)",
       }}
     >
-      <div className="container-max relative z-10 pt-6 md:pt-12 pb-32 md:pb-20">
-        <div className="grid grid-cols-12 items-center">
-          {/* Texto */}
-          <div className="col-span-12 md:col-span-6">
-            <p className="text-[14px] md:text-[16px] font-[400] mb-1">
-              Solicita tu
-            </p>
+      {/* MOBILE layout */}
+      <div className="container-max relative z-10 pt-6 pb-36 md:hidden">
+        <p className="text-[14px] font-[400] mb-1">Solicita tu</p>
 
-            <h1 className="text-[32px] md:text-[44px] font-[600] leading-[1.25] mb-2 md:mb-4 max-w-[22rem] md:max-w-lg">
+        <h1 className="text-[32px] font-[600] leading-[1.25] mb-2 max-w-[22rem]">
+          <span>Préstamo</span>
+          <br />
+          <span>100% online</span>
+        </h1>
+
+        <p className="text-[16px] font-[400] mt-1">y recíbelo al instante</p>
+
+        {/* Imagen flotante solo mobile */}
+        <Image
+          src="/hero-illustration.svg"
+          alt="Préstamo online"
+          width={180}
+          height={180}
+          priority
+          className="
+            pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 z-10
+            w-[140px] h-auto
+          "
+        />
+      </div>
+
+      {/* DESKTOP layout */}
+      <div className="hidden md:block container-max relative z-10 pt-12 pb-24">
+        <div className="grid grid-cols-12 items-center gap-6">
+          {/* Texto */}
+          <div className="col-span-6">
+            <p className="text-[16px] font-[400] mb-1">Solicita tu</p>
+            <h1 className="text-[44px] font-[600] leading-[1.25] mb-4 max-w-lg">
               <span>Préstamo</span>
               <br />
               <span>100% online</span>
             </h1>
-
-            <p className="text-[16px] md:text-[20px] font-[400] mt-1">
-              y recíbelo al instante
-            </p>
+            <p className="text-[20px] font-[400]">y recíbelo al instante</p>
           </div>
 
-          {/* Imagen */}
-          <div className="col-span-12 md:col-span-6 flex justify-center md:justify-end mt-6 md:mt-0">
+          {/* Imagen a la derecha */}
+          <div className="col-span-6 flex justify-end">
             <Image
               src="/hero-illustration.svg"
               alt="Préstamo online"
-              width={180}
-              height={180}
+              width={400}
+              height={400}
               priority
-              className="w-[140px] h-auto md:w-[360px] lg:w-[400px]"
+              className="w-[360px] lg:w-[420px] h-auto"
             />
           </div>
         </div>
 
-        {/* Formulario en desktop dentro del hero */}
-        <div className="hidden md:flex justify-center mt-10">
+        {/* Formulario dentro del Hero en desktop */}
+        <div className="flex justify-center mt-10">
           <div className="bg-white rounded-xl shadow-md p-6 flex gap-4 items-center w-full max-w-3xl">
             <input
               type="text"
