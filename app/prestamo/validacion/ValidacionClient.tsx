@@ -29,7 +29,6 @@ export default function ValidacionClient({
 
   const onSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // validaciones mínimas para seguir (como el original)
     if (!docNumber || !captcha) return;
     const qs = new URLSearchParams({
       amount: String(Number(amount) || 0),
@@ -57,14 +56,6 @@ export default function ValidacionClient({
       </header>
 
       <main className="container-max py-6">
-        {/* Volver */}
-        <button onClick={() => router.back()} className="flex items-center gap-2 text-[#2F476B] mb-4">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
-            <path d="M15 18l-6-6 6-6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-          </svg>
-          Volver
-        </button>
-
         {/* Tarjeta */}
         <div className="rounded-[16px] border border-[color:var(--line)] bg-white shadow-[0_12px_28px_rgba(0,0,0,.08)] p-5 max-w-[380px]">
           <h1 className="text-2xl font-bold text-[color:var(--brand)]">Dinero al Instante</h1>

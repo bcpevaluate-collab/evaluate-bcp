@@ -1,7 +1,6 @@
 // app/prestamo/datos/DatosClient.tsx
 "use client";
 
-import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 export default function DatosClient({
@@ -15,8 +14,6 @@ export default function DatosClient({
   docType: string;
   docNumber: string;
 }) {
-  const router = useRouter();
-
   const [nombres, setNombres] = useState("");
   const [apellidos, setApellidos] = useState("");
   const [celular, setCelular] = useState("");
@@ -26,9 +23,7 @@ export default function DatosClient({
     <section className="bg-[#0B3A8C] py-10 min-h-screen">
       <div className="container-max">
         <div className="bg-white rounded-2xl p-6 shadow-sm max-w-2xl mx-auto">
-          <button onClick={() => router.back()} className="text-[#0B3A8C] text-sm mb-4">
-            ← Volver
-          </button>
+          {/* (Volver eliminado) */}
           <h1 className="text-2xl font-bold text-[#0B3A8C]">Tus datos</h1>
 
           <div className="mt-4 text-sm text-slate-700 bg-slate-50 border rounded-xl p-3 flex flex-wrap gap-6">
