@@ -14,6 +14,7 @@ export default function Hero() {
       {/* ========== MOBILE ========== */}
       <div className="block md:hidden relative">
         <div className="container-max relative z-10 pt-5 pb-0">
+          {/* Títulos */}
           <p className="text-[14px] font-[400] mb-1">Solicita tu</p>
           <h1 className="leading-[1.15] mb-1">
             <span className="block text-[28px] font-[600]">Préstamo</span>
@@ -21,25 +22,25 @@ export default function Hero() {
           </h1>
           <p className="text-[16px] font-[400] mt-1">y recíbelo al instante</p>
 
-          {/* Ilustración: más arriba y menos alto azul */}
-          <div className="relative h-[72px] mt-1">
+          {/* Ilustración más arriba */}
+          <div className="relative h-[68px] mt-1">
             <Image
               src="/hero-illustration.svg"
               alt="Préstamo online"
-              width={120}
-              height={120}
+              width={110}
+              height={110}
               priority
-              className="pointer-events-none absolute top-[10px] right-2 w-[112px] h-auto"
+              className="pointer-events-none absolute top-[4px] right-2 w-[100px] h-auto"
             />
           </div>
         </div>
 
-        {/* Curva MUY corta para que el azul no se alargue */}
+        {/* Curva más corta */}
         <svg
           viewBox="0 0 1200 168"
           preserveAspectRatio="none"
           xmlns="http://www.w3.org/2000/svg"
-          className="pointer-events-none absolute bottom-0 left-0 w-full h-[96px]"
+          className="pointer-events-none absolute bottom-0 left-0 w-full h-[88px]"
           aria-hidden
         >
           <path
@@ -53,15 +54,19 @@ export default function Hero() {
       <div className="hidden md:block pb-16">
         <div className="container-max relative z-10 pt-14">
           <div className="grid grid-cols-12 items-center">
+            {/* Texto izquierda */}
             <div className="col-span-12 md:col-span-6">
               <p className="text-[18px] mb-3 opacity-90">Solicita tu</p>
               <h1 className="font-[600] leading-[1.15] text-white">
                 <span className="block text-[56px]">Préstamo</span>
                 <span className="block text-[56px]">100% online</span>
               </h1>
-              <p className="mt-3 text-[20px] opacity-95">y recíbelo al instante</p>
+              <p className="mt-3 text-[20px] opacity-95">
+                y recíbelo al instante
+              </p>
             </div>
 
+            {/* Ilustración derecha */}
             <div className="col-span-12 md:col-span-6 relative h-[360px]">
               <Image
                 src="/hero-illustration.svg"
@@ -73,21 +78,36 @@ export default function Hero() {
             </div>
           </div>
 
+          {/* Formulario + horario */}
           <div className="mt-8">
             <InlineLoanForm variant="hero" />
-
             <div className="mt-4 rounded-[10px] bg-[#EAF2FF] text-[#0B3A8C] p-4 flex items-center gap-3">
               <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden>
-                <circle cx="12" cy="12" r="9" fill="none" stroke="#0B3A8C" strokeWidth="2" />
-                <path d="M12 7v5l4 2" fill="none" stroke="#0B3A8C" strokeWidth="2" strokeLinecap="round" />
+                <circle
+                  cx="12"
+                  cy="12"
+                  r="9"
+                  fill="none"
+                  stroke="#0B3A8C"
+                  strokeWidth="2"
+                />
+                <path
+                  d="M12 7v5l4 2"
+                  fill="none"
+                  stroke="#0B3A8C"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                />
               </svg>
               <span className="text-[15px]">
-                Horario de atención: <b>Lun a Dom de 5:00am - 12:00am ( medianoche )</b>
+                Horario de atención:{" "}
+                <b>Lun a Dom de 5:00am - 12:00am ( medianoche )</b>
               </span>
             </div>
           </div>
         </div>
 
+        {/* Curva desktop */}
         <svg
           viewBox="0 0 1200 168"
           preserveAspectRatio="none"
